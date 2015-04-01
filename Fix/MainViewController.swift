@@ -24,14 +24,14 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
     
     var pingCount: String! {
         didSet{
-            
+            navigationItem.rightBarButtonItem?.title = "\(pingCount) Pings"
         }
     }
     
     var  rawPing: PingData!
     var lat: CLLocationDegrees!
     var long: CLLocationDegrees!
-    var  currentAnnotation: MKPointAnnotation!
+    var currentAnnotation: MKPointAnnotation!
     private var runOnce:Bool = false
     
     @IBOutlet weak var place: UIButton!
@@ -47,7 +47,7 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
      var currentPlace: String? {
         set{
             if newValue != nil {
-                place.titleLabel!.text = "\(newValue!) ▽"
+                place.setTitle("\(newValue!) ▽", forState: .Normal)
                 self.navigationItem.title! = "\(newValue!) ▽"
                 if !initialLoad {
                     updatePingAndMap()
@@ -103,8 +103,9 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
     }
     
 
-    func viewDidAppear(animated: Bool) () {
+    func viewWillAppear(animated: Bool) () {
         self.message.text = ""
+        updateCount()
     }
     
 
@@ -115,7 +116,7 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
         message.hidden = true
 
         if let user = meteor.collections["users"] as? M13OrderedDictionary {
-        NSLog(user.description)
+        println(user.description)
         
         let userObject = user.objectAtIndex(0) as [String:AnyObject]
         let pingArray = userObject["Pings"] as [AnyObject]
@@ -128,8 +129,11 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
-        currentPlace = "Here ▽"
+        currentPlace = "Here"
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateCount", name: "users_added", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateCount", name: "users_removed", object: nil)
+
 
     }
 

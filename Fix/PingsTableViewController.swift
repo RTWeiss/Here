@@ -1,5 +1,5 @@
 //
-//  pingsTableViewController.swift
+//  PingsTableViewController.swift
 //  Here
 //
 //  Created by Zackery leman on 8/2/14.
@@ -11,14 +11,14 @@ import UIKit
 
 class PingsTableViewController: UITableViewController {
     var experiment:UIViewController!
-    var userInfo:String!
-    let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
+    private  var userInfo:String!
+    private  let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
     var pingList:[PingData]?
-    var preview: [String] = []
-
+    private  var preview: [String] = []
+    
     
     //StoryBoard Constants
-    struct StoryBoard {
+    private  struct StoryBoard {
         static let pingsDetail = "pingsDetailCell"
         static let pingsDetailSegue = "toPingsDetail"
     }
@@ -49,7 +49,7 @@ class PingsTableViewController: UITableViewController {
             //May need to wait on subscriptions
         }
         self.navigationItem.title = "Current Pings"
-
+        
         let  clearAllButton :UIBarButtonItem = UIBarButtonItem(title: "Clear All", style: .Plain, target: self, action: "clearAll")
         self.navigationItem.rightBarButtonItem = clearAllButton
     }

@@ -11,41 +11,41 @@ import MapKit
 
 class PingDetailViewController: UIViewController, MKMapViewDelegate{
     
-    
-    @IBOutlet weak var message: UILabel!
-    
-
     var ping: PingData!
     
+    @IBOutlet weak var message: UILabel!
     @IBOutlet weak var pingLocation: MKMapView!
     @IBOutlet weak var placeLabel: UILabel!
     
-    // MARK: VC LifeCycle
+
     
     @IBAction func dismiss(sender: UIBarButtonItem) {
         println("Delete the ping")
-        self.navigationController?.popViewControllerAnimated(true)
+        navigationController?.popViewControllerAnimated(true)
     }
+    
+    // MARK: VC LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        var latitude  = self.ping["lat"] as CLLocationDegrees
-        var longitude  = self.ping["long"] as CLLocationDegrees
-        var latDelta:CLLocationDegrees = 0.001
-        var longDelta:CLLocationDegrees = 0.001
-        var theSpan:MKCoordinateSpan = MKCoordinateSpanMake(latDelta, longDelta)
-        var location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
-        var theRegion = MKCoordinateRegionMake(location,theSpan)
-        self.pingLocation.setRegion(theRegion, animated: false)
+        let latitude  = ping["lat"] as CLLocationDegrees
+        let longitude  = ping["long"] as CLLocationDegrees
+        let latDelta:CLLocationDegrees = 0.001
+        let longDelta:CLLocationDegrees = 0.001
+        let theSpan:MKCoordinateSpan = MKCoordinateSpanMake(latDelta, longDelta)
+        let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
+        let theRegion = MKCoordinateRegionMake(location,theSpan)
+        pingLocation.setRegion(theRegion, animated: false)
         
-        var theLocationAnnotation = MKPointAnnotation()
+        let theLocationAnnotation = MKPointAnnotation()
         theLocationAnnotation.coordinate = location
-        theLocationAnnotation.title = self.ping["location"] as String
-        theLocationAnnotation.subtitle = self.ping["location"] as String
+        theLocationAnnotation.title = ping["location"] as String
+        theLocationAnnotation.subtitle = ping["location"] as String
         
-        self.pingLocation.addAnnotation(theLocationAnnotation)
-        navigationItem.title = self.ping["userName"] as? String
-        self.placeLabel.text = self.ping["location"] as? String
-        self.message.text = self.ping["message"] as? String
+        pingLocation.addAnnotation(theLocationAnnotation)
+        navigationItem.title = ping["userName"] as? String
+        placeLabel.text = ping["location"] as? String
+        message.text = ping["message"] as? String
     }
 
 

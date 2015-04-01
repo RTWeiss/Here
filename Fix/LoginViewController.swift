@@ -10,35 +10,28 @@ import UIKit
 
 
 class LoginViewController: UIViewController {
-    let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
+   private let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
     
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var confirmPassword: UITextField!
     @IBOutlet weak var signUp: UIButton!
-    
-    var nickname: String!;
+    var nickname: String!
 
     
     struct StoryBoard {
-        
         static let loggingInSegue = "loggingIn"
     }
     
+    // MARK: VC LifeCycle
+    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
-
-        
         self.meteor.addObserver(self, forKeyPath: "websocketReady", options: NSKeyValueObservingOptions.New, context: nil)
-        
-        self.confirmPassword.hidden = true;
-        
+        self.confirmPassword.hidden = true 
     }
    
-
     
     override func viewWillAppear(animated: Bool) {
         var observingOption = NSKeyValueObservingOptions.New
@@ -57,7 +50,7 @@ class LoginViewController: UIViewController {
     @IBAction func didTapLoginButton(sender: AnyObject) {
         
         if !meteor.websocketReady {
-            let notConnectedAlert = UIAlertView(title: "Connection Error", message: "Can't find the Todo server, try again", delegate: nil, cancelButtonTitle: "OK")
+            let notConnectedAlert = UIAlertView(title: "Connection Error", message: "Can't find the server, try again", delegate: nil, cancelButtonTitle: "OK")
             notConnectedAlert.show()
             return
         }

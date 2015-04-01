@@ -12,15 +12,14 @@ class AddFriendsTableViewController: UITableViewController {
     
     @IBOutlet var contactsToAdd: UITableView!
     
-    var addressBook: ABAddressBookRef?
-    var nameArray: [String] = []
-    let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
+    private var addressBook: ABAddressBookRef?
+    private var nameArray: [String] = []
+    private let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
     var FriendsList:[Friends]!
-    var selected = ["123456789" : 123456789]
-    var newWordField: UITextField!
+    private var newWordField: UITextField!
     @IBOutlet var friendListTable: UITableView!
     
-    struct StoryBoard {
+   private struct StoryBoard {
         static let AdressBookBFPaperCell = "AdressBookBFPaperCell"
     }
     
@@ -29,25 +28,21 @@ class AddFriendsTableViewController: UITableViewController {
         
         getContactsFromAddressBook()
         
-        println(meteor.collections.description)
-        
         if let user = meteor.collections["users"] as? M13OrderedDictionary {
-            NSLog(user.description)
+            println(user.description)
             FriendsList = user.objectAtIndex(0)["FriendsList"] as [Friends]
         }
         
         
     }
-    
+       // MARK: - Prompt
     
     @IBAction func add(sender: UIBarButtonItem) {
         var alert = UIAlertController(title: "Search for Friend", message: "Enter User Name", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addTextFieldWithConfigurationHandler(configurationTextField)
         alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Cancel, handler:handleCancel))
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler:wordEntered))
-        presentViewController(alert, animated: true) {
-            println("completion block")
-        }
+        presentViewController(alert, animated: true) {}
         
     }
     
@@ -94,7 +89,7 @@ class AddFriendsTableViewController: UITableViewController {
     
     
     
-    // MARK: - Table view data source
+    // MARK: - TableView Delegate
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -139,7 +134,7 @@ class AddFriendsTableViewController: UITableViewController {
         
     }
     
-    
+    // MARK: Address Book Methods
     
     
     func extractABAddressBookRef(abRef: Unmanaged<ABAddressBookRef>!) -> ABAddressBookRef? {

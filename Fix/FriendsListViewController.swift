@@ -10,15 +10,14 @@ import UIKit
 
 class FriendsListViewController: UITableViewController {
     
-
     
-    let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
-    var nameArray:[String] = []
+    
+    private let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
     var friendsList:[Friends]!
-    var selected: [String:Int] = [:]
-    var usersToPing: [String] = []
+    private var selected: [String:Int] = [:]
+    private var usersToPing: [String] = []
     var rawPing: PingData!
-    var newWordField: UITextField!
+    private var newWordField: UITextField!
     
     
     struct StoryBoard {
@@ -67,9 +66,9 @@ class FriendsListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(StoryBoard.friendsBFPaperCell, forIndexPath: indexPath) as BFPaperTableViewCell
         
         
-
-        let cellText = (self.friendsList[indexPath.row] as NSDictionary).valueForKey("userId")
-        cell.textLabel?.text = "\(cellText)"
+        
+        let cellText = (friendsList[indexPath.row] as NSDictionary).valueForKey("userId")
+        cell.textLabel?.text = "\(cellText!)"
         cell.textLabel?.textAlignment = NSTextAlignment.Center
         cell.textLabel?.textColor = UIColor.blackColor()
         cell.textLabel?.font = UIFont.systemFontOfSize(14)
@@ -82,7 +81,7 @@ class FriendsListViewController: UITableViewController {
     }
     
     
-    override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as BFPaperTableViewCell
         
         if  selected["\(indexPath.row)"] != nil {
@@ -94,10 +93,10 @@ class FriendsListViewController: UITableViewController {
         }
     }
     
-
+    
     
     func add(){
-
+        
         if let user = meteor.collections["users"] as? M13OrderedDictionary {
             
             rawPing["_id"] = BSONIdGenerator.generate()
