@@ -1,0 +1,4 @@
+
+pod 'ObjectiveDDP'
+pod 'BFPaperTableViewCell'
+pod 'Foursquare-API-v2'

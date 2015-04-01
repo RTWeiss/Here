@@ -1,0 +1,6 @@
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/BFPaperTableViewCell" "${PODS_ROOT}/Headers/Public/Foursquare-API-v2" "${PODS_ROOT}/Headers/Public/M13OrderedDictionary" "${PODS_ROOT}/Headers/Public/ObjectiveDDP" "${PODS_ROOT}/Headers/Public/SocketRocket" "${PODS_ROOT}/Headers/Public/UIColor+BFPaperColors"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/BFPaperTableViewCell" -isystem "${PODS_ROOT}/Headers/Public/Foursquare-API-v2" -isystem "${PODS_ROOT}/Headers/Public/M13OrderedDictionary" -isystem "${PODS_ROOT}/Headers/Public/ObjectiveDDP" -isystem "${PODS_ROOT}/Headers/Public/SocketRocket" -isystem "${PODS_ROOT}/Headers/Public/UIColor+BFPaperColors"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"Pods-BFPaperTableViewCell" -l"Pods-Foursquare-API-v2" -l"Pods-M13OrderedDictionary" -l"Pods-ObjectiveDDP" -l"Pods-SocketRocket" -l"Pods-UIColor+BFPaperColors" -l"icucore" -framework "CFNetwork" -framework "Foundation" -framework "Security" -framework "UIKit"
+OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
+PODS_ROOT = ${SRCROOT}/Pods
