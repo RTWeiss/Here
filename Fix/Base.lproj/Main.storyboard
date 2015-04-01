@@ -32,7 +32,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZhF-VS-LLj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2782" y="1223"/>
+            <point key="canvasLocation" x="2782" y="923"/>
         </scene>
         <!--Select Friends-->
         <scene sceneID="fSm-aH-h5z">
@@ -208,7 +208,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uon-YS-4Mk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3512" y="1223"/>
+            <point key="canvasLocation" x="3512" y="923"/>
         </scene>
         <!--Add Friends From Contacts-->
         <scene sceneID="Y8z-yb-DFi">
@@ -246,7 +246,7 @@
             </objects>
             <point key="canvasLocation" x="3050" y="2071"/>
         </scene>
-        <!--Title-->
+        <!--Main View Controller-->
         <scene sceneID="ZPZ-CT-Dwh">
             <objects>
                 <viewController id="yap-du-poy" customClass="MainViewController" customModule="Fix" customModuleProvider="target" sceneMemberID="viewController">
@@ -375,7 +375,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="coG-vr-7ca">
+                    <navigationItem key="navigationItem" id="coG-vr-7ca">
                         <barButtonItem key="leftBarButtonItem" title="Settings" id="woE-zf-qJi">
                             <connections>
                                 <action selector="toAddFriends:" destination="yap-du-poy" id="ZST-TU-hen"/>
@@ -441,7 +441,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YiY-3a-CUM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="5Xj-zm-AAc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1205" y="1768"/>
+            <point key="canvasLocation" x="1525" y="2060"/>
         </scene>
         <!--Settings-->
         <scene sceneID="hCb-by-NMy">
@@ -470,7 +470,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ghB-iX-ugE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2029" y="267"/>
+            <point key="canvasLocation" x="1249" y="223"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="ek9-3I-SOf">
@@ -577,7 +577,7 @@
                                     <action selector="didTapLoginButton:" destination="Ysx-RY-ehv" eventType="touchUpInside" id="7Fk-QN-Kem"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bcw-Fc-hte">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bcw-Fc-hte">
                                 <rect key="frame" x="10" y="294" width="580" height="30"/>
                                 <color key="backgroundColor" white="0.87610394020000004" alpha="0.56000000000000005" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -666,7 +666,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FaX-lL-Ryu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="424" y="814"/>
+            <point key="canvasLocation" x="432" y="950"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PdH-kt-BMm">
@@ -676,6 +676,8 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zLf-kQ-LHs">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.039215686274509803" green="0.35686274509803922" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

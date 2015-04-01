@@ -48,7 +48,7 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
         set{
             if newValue != nil {
                 place.setTitle("\(newValue!) ▽", forState: .Normal)
-                self.navigationItem.title! = "\(newValue!) ▽"
+                //self.navigationItem.title! = "\(newValue!) ▽"
                     updatePingAndMap()
             }
         }
@@ -107,6 +107,10 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
         updateCount()
     }
     
+//    override func viewDidDisappear(){
+//        //stop updating location to save battery life
+//        locationManager.stopUpdatingLocation()
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
