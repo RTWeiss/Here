@@ -73,7 +73,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G5n-36-VlK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1960" y="1980"/>
+            <point key="canvasLocation" x="2368" y="2066"/>
         </scene>
         <!--Ping Detail View Controller-->
         <scene sceneID="mZ2-Bp-Edo">
@@ -196,7 +196,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uon-YS-4Mk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3512" y="1157"/>
+            <point key="canvasLocation" x="3512" y="1223"/>
         </scene>
         <!--Add Friends From Contacts-->
         <scene sceneID="Y8z-yb-DFi">
@@ -232,7 +232,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ez5-7H-hSK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2764" y="511"/>
+            <point key="canvasLocation" x="2782" y="533"/>
         </scene>
         <!--Title-->
         <scene sceneID="ZPZ-CT-Dwh">
@@ -293,14 +293,14 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rPg-D9-ljU">
-                                <rect key="frame" x="1" y="214" width="600" height="21"/>
+                                <rect key="frame" x="1" y="214" width="600" height="46"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.28999999999999998" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="TOq-5e-yjt"/>
+                                    <constraint firstAttribute="height" constant="46" id="TOq-5e-yjt"/>
                                     <constraint firstAttribute="height" constant="21" id="UfU-AB-fdz"/>
                                 </constraints>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -390,7 +390,7 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2049" y="1125"/>
+            <point key="canvasLocation" x="2029" y="923"/>
         </scene>
         <!--Campus Table View Controller-->
         <scene sceneID="HaY-vL-6qp">
@@ -429,7 +429,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YiY-3a-CUM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="5Xj-zm-AAc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1237" y="1980"/>
+            <point key="canvasLocation" x="1643" y="2066"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="ek9-3I-SOf">
@@ -479,7 +479,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <action selector="signUpPressed:" destination="Ysx-RY-ehv" eventType="touchUpInside" id="gbm-s4-58v"/>
+                                    <action selector="signUp:" destination="Ysx-RY-ehv" eventType="touchUpInside" id="PkX-zg-98x"/>
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HERE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sYB-vR-kzz">
@@ -625,7 +625,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FaX-lL-Ryu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="463" y="1125"/>
+            <point key="canvasLocation" x="475" y="945"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PdH-kt-BMm">
@@ -643,7 +643,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pjw-Xp-Nl3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1237" y="1125"/>
+            <point key="canvasLocation" x="1263" y="945"/>
         </scene>
     </scenes>
     <resources>

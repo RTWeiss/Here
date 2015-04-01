@@ -13,11 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
+    //Todo: Take most meteor calls off the main  thread
     
     
-    // Override point for customization after application launch. creates our singleton
-    var meteorClient = initialiseMeteor("pre2", "ws://favor2.meteor.com/websocket")
-    //"ws://localhost:3000/websocket"
+
+    var meteorClient = initialiseMeteor("pre2", "ws://favor2.meteor.com/websocket") //"ws://localhost:3000/websocket"
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -71,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    
+    /*
     
     func updatePostLimit(limit: Int) {
         
@@ -84,12 +84,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.meteorClient.addSubscription("interestPosts", withParameters:[[ "$or" : [ [ "_Id": "6S7jSnGWp2WBEmndf" ], [ "_Id": "a5HcnX9WCQ2CPPxmC" ]] ]] )
         
     }
+
+*/
     
 }
 
 // MARK: - Global Extensions
 
-//Deals wirh issue of navigating to a view controller embeded in a navigation view controller
+//Deals with issue of navigating to a view controller embeded in a navigation view controller
 extension UIViewController {
     var contentViewController: UIViewController {
         if let navcon = self as? UINavigationController {

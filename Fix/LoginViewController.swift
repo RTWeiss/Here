@@ -10,7 +10,7 @@ import UIKit
 
 
 class LoginViewController: UIViewController {
-   private let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
+    private let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
     
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var email: UITextField!
@@ -18,7 +18,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var confirmPassword: UITextField!
     @IBOutlet weak var signUp: UIButton!
     var nickname: String!
-
+    
     
     struct StoryBoard {
         static let loggingInSegue = "loggingIn"
@@ -29,9 +29,9 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.meteor.addObserver(self, forKeyPath: "websocketReady", options: NSKeyValueObservingOptions.New, context: nil)
-        self.confirmPassword.hidden = true 
+        self.confirmPassword.hidden = true
     }
-   
+    
     
     override func viewWillAppear(animated: Bool) {
         var observingOption = NSKeyValueObservingOptions.New
@@ -42,9 +42,65 @@ class LoginViewController: UIViewController {
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<()>) {
         
         if (keyPath == "websocketReady" && meteor.websocketReady) {
-
+            
         }
     }
+    
+    @IBAction func signUp(sender: UIButton) {
+        if self.confirmPassword.hidden {
+            //Show hidden field
+            self.confirmPassword.hidden = false
+        } else {
+
+            if password.text == confirmPassword.text {
+                //Check connection
+                if !meteor.websocketReady {
+                    let notConnectedAlert = UIAlertView(title: "Connection Error", message: "Can't find the server, try again", delegate: nil, cancelButtonTitle: "OK")
+                    notConnectedAlert.show()
+                    return
+                }
+                
+                self.meteor.signupWithEmail(email.text, password:password.text, fullname: email.text)
+                    {(response, error) in
+                        if (error != nil) {
+                            
+                            var alert = UIAlertController(title: "Sign up Error", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+                            self.presentViewController(alert, animated: true, completion: nil)
+                            return
+                            
+                        }
+                        
+                        let parameters = [("\(arc4random())"),self.meteor.userId]
+                        
+                        self.meteor.callMethodName("addUserName", parameters:parameters, responseCallback:{( response,  error) in
+                            if (error != nil) {
+                                println("Failed at adding username")
+                                println("\(error.description)")
+                                
+                                return
+                            }
+                            println("Sucess at adding userName")
+                        });
+                        
+                        
+                        self.handleSuccessfulAuth()
+                }
+                
+                
+            } else {
+                
+                var alert = UIAlertController(title: "Sign up Error", message: "Passwords do not match. Please re-enter passwords.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+                
+            }
+            
+        }
+    }
+    
+    
+    
     
     
     @IBAction func didTapLoginButton(sender: AnyObject) {
@@ -66,15 +122,15 @@ class LoginViewController: UIViewController {
     }
     
     func handleSuccessfulAuth() {
-     performSegueWithIdentifier(StoryBoard.loggingInSegue, sender: nil)
-  
+        performSegueWithIdentifier(StoryBoard.loggingInSegue, sender: nil)
+        
     }
     
     func handleFailedAuth(error: NSError) {
         UIAlertView(title: "Here", message:error.localizedDescription, delegate: nil, cancelButtonTitle: "Try Again").show()
     }
     
-
+    
     
 }
 
