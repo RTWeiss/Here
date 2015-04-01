@@ -11,6 +11,7 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    
     var window: UIWindow?
     
     //Todo: Take most meteor calls off the main  thread
@@ -119,3 +120,9 @@ extension UIColor{
 typealias PingData = [String:AnyObject]
 typealias User = AnyObject
 typealias Friends = AnyObject
+
+
+// MARK: - Global Constants
+struct GlobalConstants{
+    static let singleUserAccount = "singleUserAccount"
+}

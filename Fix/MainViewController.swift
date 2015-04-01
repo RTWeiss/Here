@@ -114,14 +114,14 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
         custom = false
         message.hidden = true
 
-        if let user = meteor.collections["users"] as? M13OrderedDictionary {
-        println(user.description)
-        
-        let userObject = user.objectAtIndex(0) as [String:AnyObject]
-        let pingArray = userObject["Pings"] as [AnyObject]
-        pingCount = "\(pingArray.count)"
-            
-        }
+//        if let user = meteor.collections["users"] as? M13OrderedDictionary {
+//        println(user.description)
+//        
+//        let userObject = user.objectAtIndex(0) as [String:AnyObject]
+//        let pingArray = userObject["Pings"] as [AnyObject]
+//        pingCount = "\(pingArray.count)"
+//        
+//        }
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest

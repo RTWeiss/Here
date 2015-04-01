@@ -28,8 +28,10 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.meteor.addObserver(self, forKeyPath: "websocketReady", options: NSKeyValueObservingOptions.New, context: nil)
+        self.meteor.addObserver(self, forKeyPath: "connected", options: NSKeyValueObservingOptions.New, context: nil)
         self.confirmPassword.hidden = true
+        
+        
     }
     
     
@@ -41,8 +43,15 @@ class LoginViewController: UIViewController {
     
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<()>) {
         
-        if (keyPath == "websocketReady" && meteor.websocketReady) {
-            
+        if (keyPath == "connected" && meteor.websocketReady) {
+            let (dictionary, error) = Locksmith.loadDataForUserAccount(GlobalConstants.singleUserAccount)
+            if let result = dictionary {
+                email.text = (result.allKeys as [String]).last
+                password.text = (result.allValues as [String]).last
+                signIn()
+            } else {
+                println(error)
+            }
         }
     }
     
@@ -105,6 +114,10 @@ class LoginViewController: UIViewController {
     
     @IBAction func didTapLoginButton(sender: AnyObject) {
         
+        signIn()
+    }
+    
+    func signIn(){
         if !meteor.websocketReady {
             let notConnectedAlert = UIAlertView(title: "Connection Error", message: "Can't find the server, try again", delegate: nil, cancelButtonTitle: "OK")
             notConnectedAlert.show()
@@ -122,6 +135,10 @@ class LoginViewController: UIViewController {
     }
     
     func handleSuccessfulAuth() {
+        if let error = Locksmith.saveData([email.text: password.text], forUserAccount: GlobalConstants.singleUserAccount){
+            
+            println(error)
+        } 
         performSegueWithIdentifier(StoryBoard.loggingInSegue, sender: nil)
         
     }
@@ -129,8 +146,9 @@ class LoginViewController: UIViewController {
     func handleFailedAuth(error: NSError) {
         UIAlertView(title: "Here", message:error.localizedDescription, delegate: nil, cancelButtonTitle: "Try Again").show()
     }
+
     
-    
+
     
 }
 

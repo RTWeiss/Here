@@ -461,10 +461,12 @@
                             <color key="tintColor" red="1" green="0.152418628" blue="0.085917597639999996" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="LogOut:" destination="2U1-g5-Sai" id="kjN-RS-PfN"/>
-                                <segue destination="Ysx-RY-ehv" kind="presentation" identifier="logOut" id="mfX-ut-mId"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="Ysx-RY-ehv" kind="presentation" identifier="logOut" id="AJ1-Z3-wS3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ghB-iX-ugE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -485,7 +487,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="6ez-PJ-ioa">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test@bowdoin.edu" borderStyle="roundedRect" placeholder="username" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="amR-Be-qbd">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="amR-Be-qbd">
                                 <rect key="frame" x="10" y="186" width="580" height="46"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="0.52000000000000002" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -538,7 +540,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dVI-q8-ovZ">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dVI-q8-ovZ">
                                 <rect key="frame" x="10" y="240" width="580" height="46"/>
                                 <color key="backgroundColor" white="0.87610394020000004" alpha="0.56000000000000005" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -664,7 +666,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FaX-lL-Ryu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="475" y="945"/>
+            <point key="canvasLocation" x="424" y="814"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PdH-kt-BMm">
