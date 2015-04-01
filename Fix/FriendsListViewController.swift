@@ -8,32 +8,31 @@
 
 import UIKit
 
-class FriendsList: UITableViewController {
+class FriendsListViewController: UITableViewController {
     var nameArray:[NSString] = []
-    var meteor:MeteorClient!;
-    var FriendsList:NSArray!;
-    var selected: [String:Int] = [:];
-    var usersToPing: [String]!;
-    var  rawPing: NSMutableDictionary!;
-    var newWordField: UITextField!;
-    @IBOutlet var friendListTable: UITableView!
+    var meteor:MeteorClient! 
+    var FriendsList:NSArray! 
+    var selected: [String:Int] = [:] 
+    var usersToPing: [String]! 
+    var  rawPing: NSMutableDictionary! 
+    var newWordField: UITextField! 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Select Friends"
-        self.friendListTable.registerClass(BFPaperTableViewCell.self, forCellReuseIdentifier: "BFPaperCell")
+        self.tableView.registerClass(BFPaperTableViewCell.self, forCellReuseIdentifier: "BFPaperCell")
         let  SendButton :UIBarButtonItem = UIBarButtonItem(title: "Send", style: .Plain, target: self, action: "send")
-        self.navigationItem.rightBarButtonItem = SendButton;
+        self.navigationItem.rightBarButtonItem = SendButton 
         let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         self.meteor = appDelegate.meteorClient
-           let user = self.meteor.collections["users"] as M13OrderedDictionary;
-        NSLog(user.description);
-        var dict: NSDictionary = user.objectAtIndex(0) as NSDictionary;
-        var dictA: NSArray = ["FriendsList"] as NSArray;
-        var emails: NSDictionary = user.objectAtIndex(0) as NSDictionary;
-        var emails2: NSArray = emails["FriendsList"] as NSArray;
+           let user = self.meteor.collections["users"] as M13OrderedDictionary 
+        NSLog(user.description) 
+        var dict: NSDictionary = user.objectAtIndex(0) as NSDictionary 
+        var dictA: NSArray = ["FriendsList"] as NSArray 
+        var emails: NSDictionary = user.objectAtIndex(0) as NSDictionary 
+        var emails2: NSArray = emails["FriendsList"] as NSArray 
         self.FriendsList = emails2
         for test in emails2{
-            var fargo: NSString = test["userId"] as NSString;
+            var fargo: NSString = test["userId"] as NSString 
         }
     }
     
@@ -85,20 +84,20 @@ class FriendsList: UITableViewController {
         let ity: NSDictionary = self.FriendsList[indexPath.row] as NSDictionary
         let bity = ity.valueForKey("userId")
         cell.textLabel?.text = "\(bity)"
-        cell.textLabel?.textAlignment = NSTextAlignment.Center;
-        cell.textLabel?.textColor = UIColor.blackColor();
-        cell.textLabel?.font = UIFont.systemFontOfSize(14);
-        self.friendListTable.allowsMultipleSelection = true;
+        cell.textLabel?.textAlignment = NSTextAlignment.Center 
+        cell.textLabel?.textColor = UIColor.blackColor() 
+        cell.textLabel?.font = UIFont.systemFontOfSize(14) 
+        self.tableView.allowsMultipleSelection = true 
         cell.tapCircleColor = UIColor.paperColorAmber()
-        cell.rippleFromTapLocation = true;
-        cell.backgroundFadeColor = UIColor.paperColorBlue();
-        cell.textLabel?.backgroundColor = UIColor.clearColor();
+        cell.rippleFromTapLocation = true 
+        cell.backgroundFadeColor = UIColor.paperColorBlue() 
+        cell.textLabel?.backgroundColor = UIColor.clearColor() 
         return cell
     }
     
     
     override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as BFPaperTableViewCell ;
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as BFPaperTableViewCell  
         
         if let unwrappedValue = self.selected["\(indexPath.row)"] {
             self.selected.removeValueForKey("\(indexPath.row)")
@@ -108,7 +107,7 @@ class FriendsList: UITableViewController {
             self.selected["\(indexPath.row)"] = indexPath.row
         }
         
-        //self.friendListTable.reloadData()
+        //self.tableView.reloadData()
     }
     
     
@@ -117,23 +116,23 @@ class FriendsList: UITableViewController {
     
     func add(){
         
-        var uid: NSString = BSONIdGenerator.generate();
+        var uid: NSString = BSONIdGenerator.generate() 
         self.rawPing["sender"] = self.meteor.userId
         self.rawPing["_id"] = uid
-           let user = self.meteor.collections["users"] as M13OrderedDictionary;
-        var dict: NSDictionary = user.objectAtIndex(0) as NSDictionary;
-        var userName: String = dict["userName"] as String;
+           let user = self.meteor.collections["users"] as M13OrderedDictionary 
+        var dict: NSDictionary = user.objectAtIndex(0) as NSDictionary 
+        var userName: String = dict["userName"] as String 
         self.rawPing["userName"] = userName
-        var parameters: NSArray = [self.usersToPing, self.rawPing];
+        var parameters: NSArray = [self.usersToPing, self.rawPing] 
         self.meteor.callMethodName("addPing", parameters:parameters, responseCallback:{( response,  error) in
             if (error != nil) {
-                NSLog("failed");
-                return;
+                NSLog("failed") 
+                return 
             }
-            NSLog("sucess");
-        });
+            NSLog("sucess") 
+        }) 
         
-        self.navigationController?.popViewControllerAnimated(true);
+        self.navigationController?.popViewControllerAnimated(true) 
         
  
     }

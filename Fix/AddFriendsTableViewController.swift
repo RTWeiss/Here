@@ -16,10 +16,10 @@ class AddFriendsTableViewController: UITableViewController {
     
     var addressBook: ABAddressBookRef?
     var nameArray:[NSString] = []
-    var meteor:MeteorClient!;
-    var FriendsList:NSArray!;
-    var selected: [String:Int] = ["123456789" : 123456789];
-    var newWordField: UITextField!;
+    var meteor:MeteorClient! 
+    var FriendsList:NSArray! 
+    var selected: [String:Int] = ["123456789" : 123456789] 
+    var newWordField: UITextField! 
     @IBOutlet var friendListTable: UITableView!
 
     override func viewDidLoad() {
@@ -29,14 +29,14 @@ class AddFriendsTableViewController: UITableViewController {
         self.contactsToAdd.registerClass(BFPaperTableViewCell.self, forCellReuseIdentifier: "BFPaperCell")
         let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         self.meteor = appDelegate.meteorClient
-        NSLog(self.meteor.collections.description);
-            let user = self.meteor.collections["users"] as M13OrderedDictionary;
-        NSLog(user.description);
-        var dict: NSDictionary = user.objectAtIndex(0) as NSDictionary;
-        var dictA: NSArray = ["FriendsList"] as NSArray;
+        NSLog(self.meteor.collections.description) 
+            let user = self.meteor.collections["users"] as M13OrderedDictionary 
+        NSLog(user.description) 
+        var dict: NSDictionary = user.objectAtIndex(0) as NSDictionary 
+        var dictA: NSArray = ["FriendsList"] as NSArray 
         self.FriendsList = dictA
         let  addButton :UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "add")
-        self.navigationItem.rightBarButtonItem = addButton;
+        self.navigationItem.rightBarButtonItem = addButton 
         
     }
     
@@ -52,17 +52,17 @@ class AddFriendsTableViewController: UITableViewController {
         var textView2 = self.newWordField.text
         if textView2 != ""{
 
-            var parameters: NSArray = [ textView2,self.meteor.userId];
+            var parameters: NSArray = [ textView2,self.meteor.userId] 
             self.meteor.callMethodName("verifyUser", parameters:parameters) {( response,  error) in
                 if (error != nil) {
-                    NSLog("failed at verifying user");
+                    NSLog("failed at verifying user") 
                     println(error.description)
                     var alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
-                    return;
+                    return 
                 }
-                NSLog("sucess at verifying user");
+                NSLog("sucess at verifying user") 
                 var alert = UIAlertController(title: "Friend Added", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
                 
                 alert.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.Cancel, handler: nil))
@@ -115,19 +115,19 @@ class AddFriendsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("BFPaperCell", forIndexPath: indexPath) as BFPaperTableViewCell
         cell.textLabel?.text = self.nameArray[indexPath.row]
-        cell.textLabel?.textAlignment = NSTextAlignment.Center;
-        cell.textLabel?.textColor = UIColor.blackColor();
-        cell.textLabel?.font = UIFont.systemFontOfSize(14);
-        self.contactsToAdd.allowsMultipleSelection = true;
+        cell.textLabel?.textAlignment = NSTextAlignment.Center 
+        cell.textLabel?.textColor = UIColor.blackColor() 
+        cell.textLabel?.font = UIFont.systemFontOfSize(14) 
+        self.contactsToAdd.allowsMultipleSelection = true 
         cell.tapCircleColor = UIColor.paperColorAmber()
-        cell.rippleFromTapLocation = true;
-        cell.backgroundFadeColor = UIColor.paperColorBlue();
-        cell.textLabel?.backgroundColor = UIColor.clearColor();
+        cell.rippleFromTapLocation = true 
+        cell.backgroundFadeColor = UIColor.paperColorBlue() 
+        cell.textLabel?.backgroundColor = UIColor.clearColor() 
         return cell
     }
     
     override func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as BFPaperTableViewCell ;
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as BFPaperTableViewCell  
         var parameters = [self.nameArray[indexPath.row],"sfgargsdth"]
         
         self.meteor.callMethodName("verifyUser", parameters:parameters, responseCallback:{(response,  error) in
@@ -137,11 +137,11 @@ class AddFriendsTableViewController: UITableViewController {
                 
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
-                return;
+                return 
             }
             NSLog("User exists")
             
-        });
+        }) 
 
     }
     
@@ -190,9 +190,9 @@ class AddFriendsTableViewController: UITableViewController {
             var contactName: String = ABRecordCopyCompositeName(contactPerson).takeRetainedValue() as NSString
             println ("contactName \(contactName)")
             self.nameArray.append(contactName)
-            var multi: ABMultiValueRef = ABRecordCopyValue(record, kABPersonPhoneProperty).takeRetainedValue();
-            for ( var j:CFIndex = 0; j < ABMultiValueGetCount(multi); j++) {
-                var  phone:NSString = ABMultiValueCopyValueAtIndex(multi, j).takeRetainedValue() as NSString;
+            var multi: ABMultiValueRef = ABRecordCopyValue(record, kABPersonPhoneProperty).takeRetainedValue() 
+            for ( var j:CFIndex = 0;  j < ABMultiValueGetCount(multi);  j++) {
+                var  phone:NSString = ABMultiValueCopyValueAtIndex(multi, j).takeRetainedValue() as NSString 
                 numbersArray.append(phone)
                 println(phone)
             }

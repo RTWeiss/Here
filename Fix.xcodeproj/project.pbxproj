@@ -15,8 +15,8 @@
 		A29193C01ACB6FBA002732FD /* FixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193BF1ACB6FBA002732FD /* FixTests.swift */; };
 		A29193D21ACB6FCA002732FD /* bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = A29193CA1ACB6FCA002732FD /* bridge.m */; };
 		A29193D31ACB6FCA002732FD /* AddFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193CB1ACB6FCA002732FD /* AddFriendsTableViewController.swift */; };
-		A29193D41ACB6FCA002732FD /* FriendsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193CC1ACB6FCA002732FD /* FriendsList.swift */; };
-		A29193D51ACB6FCA002732FD /* PingDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193CD1ACB6FCA002732FD /* PingDetail.swift */; };
+		A29193D41ACB6FCA002732FD /* FriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193CC1ACB6FCA002732FD /* FriendsListViewController.swift */; };
+		A29193D51ACB6FCA002732FD /* PingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193CD1ACB6FCA002732FD /* PingDetailViewController.swift */; };
 		A29193D61ACB6FCA002732FD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193CE1ACB6FCA002732FD /* LoginViewController.swift */; };
 		A29193D71ACB6FCA002732FD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193CF1ACB6FCA002732FD /* MainViewController.swift */; };
 		A29193D81ACB6FCA002732FD /* PingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193D01ACB6FCA002732FD /* PingsTableViewController.swift */; };
@@ -49,8 +49,8 @@
 		A29193C91ACB6FC9002732FD /* Fix-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fix-Bridging-Header.h"; sourceTree = "<group>"; };
 		A29193CA1ACB6FCA002732FD /* bridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bridge.m; sourceTree = "<group>"; };
 		A29193CB1ACB6FCA002732FD /* AddFriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendsTableViewController.swift; sourceTree = "<group>"; };
-		A29193CC1ACB6FCA002732FD /* FriendsList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsList.swift; sourceTree = "<group>"; };
-		A29193CD1ACB6FCA002732FD /* PingDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingDetail.swift; sourceTree = "<group>"; };
+		A29193CC1ACB6FCA002732FD /* FriendsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListViewController.swift; sourceTree = "<group>"; };
+		A29193CD1ACB6FCA002732FD /* PingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingDetailViewController.swift; sourceTree = "<group>"; };
 		A29193CE1ACB6FCA002732FD /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A29193CF1ACB6FCA002732FD /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A29193D01ACB6FCA002732FD /* PingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingsTableViewController.swift; sourceTree = "<group>"; };
@@ -160,8 +160,8 @@
 			isa = PBXGroup;
 			children = (
 				A29193CB1ACB6FCA002732FD /* AddFriendsTableViewController.swift */,
-				A29193CC1ACB6FCA002732FD /* FriendsList.swift */,
-				A29193CD1ACB6FCA002732FD /* PingDetail.swift */,
+				A29193CC1ACB6FCA002732FD /* FriendsListViewController.swift */,
+				A29193CD1ACB6FCA002732FD /* PingDetailViewController.swift */,
 				A29193CE1ACB6FCA002732FD /* LoginViewController.swift */,
 				A29193CF1ACB6FCA002732FD /* MainViewController.swift */,
 				A29193D01ACB6FCA002732FD /* PingsTableViewController.swift */,
@@ -310,8 +310,8 @@
 				A29193D71ACB6FCA002732FD /* MainViewController.swift in Sources */,
 				A29193D21ACB6FCA002732FD /* bridge.m in Sources */,
 				A29193D91ACB6FCA002732FD /* CampusTableViewController.swift in Sources */,
-				A29193D41ACB6FCA002732FD /* FriendsList.swift in Sources */,
-				A29193D51ACB6FCA002732FD /* PingDetail.swift in Sources */,
+				A29193D41ACB6FCA002732FD /* FriendsListViewController.swift in Sources */,
+				A29193D51ACB6FCA002732FD /* PingDetailViewController.swift in Sources */,
 				A29193D31ACB6FCA002732FD /* AddFriendsTableViewController.swift in Sources */,
 				A29193DB1ACB8BB1002732FD /* UserInfo.swift in Sources */,
 				A29193AA1ACB6FB9002732FD /* AppDelegate.swift in Sources */,

@@ -23,6 +23,7 @@ class LoginViewController: UIViewController {
 
     
     struct StoryBoard {
+        
         static let loggingInSegue = "loggingIn"
     }
     
@@ -34,7 +35,6 @@ class LoginViewController: UIViewController {
         
         self.meteor.addObserver(self, forKeyPath: "websocketReady", options: NSKeyValueObservingOptions.New, context: nil)
         
-    
         self.confirmPassword.hidden = true;
         
     }
@@ -83,18 +83,5 @@ class LoginViewController: UIViewController {
     }
     
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
     
 }

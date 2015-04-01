@@ -12,66 +12,65 @@ import CoreLocation
 
 class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDelegate {
     
-    var meteor:MeteorClient!;
-    var passLong: Double!;
-    var passLat: Double!;
-    
+    let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
+    var passLong: Double!
+    var passLat: Double!
     
     @IBOutlet weak var message: UITextField!
     
     var custom:Bool!
-    var justLaunched:Bool = true
-    var nearByVenues:[Dictionary<String,Any>] = [];
+    private var justLaunched:Bool = true
+    var nearByVenues:[[String:AnyObject]] = []
+    
     var pingCount: String! {
         didSet{
             
         }
     }
-    var  rawPing: NSMutableDictionary!;
-    var lat: CLLocationDegrees!;
-    var long: CLLocationDegrees!;
-    var  currentAnnotation: MKPointAnnotation!;
     
+    var  rawPing: NSMutableDictionary!
+    var lat: CLLocationDegrees!
+    var long: CLLocationDegrees!
+    var  currentAnnotation: MKPointAnnotation!
+    private var runOnce:Bool = false
     
-    var toPass:String!;
-    var toPass2:String?
-    var runOnce:Bool = false
-    
-
-    var settingsPopover: UIPopoverController!;
-
-    
+    @IBOutlet weak var place: UIButton!
     @IBOutlet weak var currentLocation: MKMapView!
     
-    let locationManager = CLLocationManager()
+    private let locationManager = CLLocationManager()
     
     private struct StoryBoard {
         static let toFriendsList = "toFriendsList"
         static let settingsPopover = "settingsPopover"
     }
-
-    @IBAction func selected(segue:UIStoryboardSegue){
-        if toPass2 != nil {
-            self.place.titleLabel!.text = toPass2
-            self.place.titleLabel!.text = self.place.titleLabel!.text! + " ▽"
-            locationManager.startUpdatingLocation()
-            self.currentLocation.removeAnnotations(currentLocation.annotations)
-            
-            
-            if self.custom != true{
-                let dict:NSDictionary = ["lat": self.passLat, "long": self.passLong, "location": "\(self.toPass2!)"]
-                self.rawPing = dict.mutableCopy() as NSMutableDictionary
-            } else {
-                
-                let dict:NSDictionary = ["lat": self.lat, "long": self.long, "location": "\(self.toPass2!)"]
-                self.rawPing = dict.mutableCopy() as NSMutableDictionary
-                
+    
+     var currentPlace: String? {
+        set{
+            if currentPlace != nil {
+                self.place.titleLabel!.text = currentPlace
+                self.place.titleLabel!.text = self.place.titleLabel!.text! + " ▽"
+                updatePingAndMap()
             }
-            
-            
         }
+        get {
+            return self.place.titleLabel!.text
+        }
+    }
+    
+    
+    func updatePingAndMap(){
+        locationManager.startUpdatingLocation()
+        self.currentLocation.removeAnnotations(currentLocation.annotations)
+        
+        if self.custom != true{
+            self.rawPing = ["lat": passLat, "long": passLong, "location": "\(currentPlace!)"]
+        } else {
+            rawPing = ["lat": lat, "long": long, "location": "\(currentPlace!)"]
+        }
+        
         var longitude:CLLocationDegrees
         var latitude:CLLocationDegrees
+        
         if self.custom  != true{
             print("Indicates not custom")
             longitude = self.passLong
@@ -93,53 +92,55 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
         var theLocationAnnotation = MKPointAnnotation()
         
         theLocationAnnotation.coordinate = location
-        theLocationAnnotation.title = toPass2
+        theLocationAnnotation.title =  currentPlace ?? "ERROR"
         theLocationAnnotation.subtitle = "Current Location"
         self.currentAnnotation = theLocationAnnotation
         self.currentLocation.addAnnotation(theLocationAnnotation)
         self.currentLocation.selectAnnotation(theLocationAnnotation, animated: true)
-        
     }
+    
+
     func viewDidAppear(animated: Bool) () {
-        //self.navigationController.navigationBarHidden = false;//JUSTCHANGED
         self.message.text = ""
     }
     
-    func updateCount(){
-            let user = self.meteor.collections["users"] as M13OrderedDictionary;
-        var dict: NSDictionary = user.objectAtIndex(0) as NSDictionary;
-        var dictA: NSArray = dict["currentInterests"] as NSArray;
-        self.pingCount = "\(dictA.count)"
-    }
-    func seg(){
-        self.performSegueWithIdentifier("toPings", sender: self)
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.custom = false
-        self.message.hidden = true
-        println("Why reload")
-        let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        self.meteor = appDelegate.meteorClient
-        let user = self.meteor.collections["users"] as M13OrderedDictionary //as NSArray;
-        NSLog(user.description);
-        var dict: NSDictionary = user.objectAtIndex(0) as NSDictionary;
-        var dictA: NSArray = dict["Pings"] as NSArray;
-        self.pingCount = "\(dictA.count)"
+        
+        custom = false
+        message.hidden = true
+
+        let user = self.meteor.collections["users"] as M13OrderedDictionary
+        NSLog(user.description)
+        
+        let userObject = user.objectAtIndex(0) as [String:AnyObject]
+        let pingArray = userObject["Pings"] as [AnyObject]
+        pingCount = "\(pingArray.count)"
+        
+        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
-        if (toPass2 != nil) {
-            self.place.titleLabel!.text = toPass2
+        
+        
+        if (currentPlace != nil) {
+            self.place.titleLabel!.text = currentPlace!
             if self.place.titleLabel!.text == "Here ▽" {
             }
         }
-        self.navigationItem.hidesBackButton = true;
-        self.navigationItem.title = self.toPass;
+        
+        self.navigationItem.hidesBackButton = true
     }
     
+    
+    func updateCount(){
+        let user = self.meteor.collections["users"] as M13OrderedDictionary
+        let userObject = user.objectAtIndex(0) as [String:AnyObject]
+        let pingArray = userObject["Pings"] as [AnyObject]
+        pingCount = "\(pingArray.count)"
+    }
     
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
@@ -148,11 +149,11 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
     
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
-            NSLog("%i",locations.count)
-            var  coor: CLLocation = locations[0] as CLLocation
-            var latitude = coor.coordinate.latitude
-            var longitude = coor.coordinate.longitude
+        CLGeocoder().reverseGeocodeLocation(manager.location) {(placemarks, error)->Void in
+            println("\(locations.count)")
+            let coor = locations[0] as CLLocation
+            let latitude = coor.coordinate.latitude
+            let longitude = coor.coordinate.longitude
             NSLog(longitude.description)
             NSLog(latitude.description)
             self.long = longitude
@@ -168,139 +169,125 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
                 let pm = placemarks[0] as CLPlacemark
                 self.displayLocationInfo(pm)
             } else {
-                NSLog("Problem with the data received from geocoder");
+                NSLog("Problem with the data received from geocoder") 
             }
-        })
+        }
     }
     
     
     
     
     func displayLocationInfo(placemark: CLPlacemark) {
-       // if placemark != nil {
-            //stop updating location to save battery life
-            locationManager.stopUpdatingLocation()
-          /*  println(placemark.locality ? placemark.locality : "")
-            println(placemark.postalCode ? placemark.postalCode : "")
-            println(placemark.administrativeArea ? placemark.administrativeArea : "")
-            println(placemark.country ? placemark.country : "")*/
-            loadPlaces()
+        
+        //stop updating location to save battery life
+        locationManager.stopUpdatingLocation()
+
+        loadPlaces()
+        
+        if self.justLaunched {
+            let latitude:CLLocationDegrees = self.lat
+            let longitude:CLLocationDegrees = self.long
+            let latDelta:CLLocationDegrees = 0.001
+            let longDelta:CLLocationDegrees = 0.001
+            let theSpan:MKCoordinateSpan = MKCoordinateSpanMake(latDelta, longDelta)
+            let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
+            let theRegion = MKCoordinateRegionMake(location,theSpan)
+            currentLocation.setRegion(theRegion, animated: false)
+            let theLocationAnnotation = MKPointAnnotation()
+            theLocationAnnotation.coordinate = location
+            theLocationAnnotation.title = currentPlace
+            theLocationAnnotation.subtitle = "Current Location"
             
-            if self.justLaunched {
-                var latitude:CLLocationDegrees = self.lat
-                var longitude:CLLocationDegrees = self.long
-                var latDelta:CLLocationDegrees = 0.001
-                var longDelta:CLLocationDegrees = 0.001
-                var theSpan:MKCoordinateSpan = MKCoordinateSpanMake(latDelta, longDelta)
-                var location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
-                var theRegion = MKCoordinateRegionMake(location,theSpan)
-                self.currentLocation.setRegion(theRegion, animated: false)
-                var theLocationAnnotation = MKPointAnnotation()
-                theLocationAnnotation.coordinate = location
-                theLocationAnnotation.title = self.toPass2
-                theLocationAnnotation.subtitle = "Current Location"
-                
-                self.currentLocation.addAnnotation(theLocationAnnotation)
-                
-                self.justLaunched = false
-            }
+            currentLocation.addAnnotation(theLocationAnnotation)
+            justLaunched = false
+        }
     }
     
-    
-    
-    
-    func dismissPopover  (){
-        self.settingsPopover.dismissPopoverAnimated(true);
-    }
-    
-
-    @IBOutlet weak var place: UIButton!
-
- 
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
         if segue.identifier == StoryBoard.toFriendsList {
-            var svc = segue!.destinationViewController as friendsList;
-            self.rawPing["message"] = self.message.text
-            svc.rawPing = self.rawPing
+            if let flvc = segue.destinationViewController as? FriendsListViewController{
+                rawPing["message"] = self.message.text
+                flvc.rawPing = self.rawPing
+            }
         }
         
         if segue.identifier == StoryBoard.settingsPopover {
-            var svc = segue!.destinationViewController as CampusTableViewController;
-            svc.nearByVenues  = self.nearByVenues
+            if let ctvc = segue.destinationViewController as? CampusTableViewController{
+                ctvc.nearByVenues  = self.nearByVenues
+            }
             
         }
     }
     
+    
+    
     func loadPlaces(){
-        var lat: NSNumber = NSNumber(double: self.lat)
-        var long: NSNumber = NSNumber(double: self.long)
-        var limit: NSNumber = NSNumber(int: 20)
-        var radius: NSNumber = NSNumber(int: 100)
         
-        Foursquare2.venueSearchNearByLatitude(lat,longitude: long, query: nil, limit: limit, intent: FoursquareIntentType.intentCheckin, radius: radius, categoryId: nil, callback: {(success, venues) in
+        let lat = NSNumber(double: self.lat)
+        let long = NSNumber(double: self.long)
+        let limit = NSNumber(int: 20)
+        let radius = NSNumber(int: 100)
+        
+        //Query FourSquare for nearby venues
+        Foursquare2.venueSearchNearByLatitude(lat,longitude: long, query: nil, limit: limit, intent: FoursquareIntentType.intentCheckin, radius: radius, categoryId: nil) {(success, venues) in
             
             if (success) {
-                var dic:NSDictionary = venues as NSDictionary;
                 
-                //  println(dic.description)
+                let venuesObject = ((venues as [String:AnyObject])["response"] as [String:AnyObject])["venues"] as [[String:AnyObject]]
                 
-                var dic2:NSDictionary =  dic["response"] as NSDictionary
-                //  println(dic2.description)
-                
-                var dic3:NSArray =  dic2["venues"] as NSArray
-                
-                
-                // println(dic3.description)
-                for places in dic3 {
-                    var  name:String = places["name"] as String
-                    //  println(name)
-                    var dic4:NSDictionary =  places["location"] as NSDictionary
+                for places in venuesObject {
                     
+                    let name = places["name"] as String
+
+                    let dic2 =  places["location"] as [String:AnyObject]
                     
+                    let latString =  dic2["lat"] as Double
                     
-                    let latString:Double =  dic4["lat"] as Double
-                    let lat:Double = latString + 0
-                    let longString:Double =  dic4["lng"] as Double
-                    let long:Double = longString + 0
+                    let lat = latString + 0
                     
+                    let longString =  dic2["lng"] as Double
                     
-                    let it:Dictionary<String,Any>  = ["location": name,"lat": lat, "long": long]
-                    if  self.nearByVenues.count == 0{
-                        
-                    }
-                    self.nearByVenues.append(it)
-                    if  self.nearByVenues.count == 1{
-                        let dict:NSDictionary = ["lat": lat, "long": long, "location": name]
-                        self.rawPing = dict.mutableCopy() as NSMutableDictionary
+                    let long = longString + 0
+   
+                    self.nearByVenues.append(["location": name,"lat": lat, "long": long])
+                    
+                    if  self.nearByVenues.count == 1 {
+                         self.rawPing  = ["lat": lat, "long": long, "location": name]
+                       
                     }
                     self.updateLocButton()
                     
                 }
-                
-                
             } else {
                 println("Failure")
                 
             }
-            
-            
-            
-        })
+
+        }
         
     }
     
     func updateLocButton(){
         if (!self.runOnce){
-            let what = self.nearByVenues[0]
-            self.place.titleLabel!.text = what["location"] as String
-             self.place.titleLabel!.text = self.place.titleLabel!.text! + " ▽"
+            
+            let selectedVenueText = self.nearByVenues[0]["location"] as String
+            self.place.titleLabel!.text = "\(selectedVenueText)"
+            self.place.titleLabel!.text = self.place.titleLabel!.text! + " ▽"
             self.runOnce = true
         }
     }
     
+    //Shows use the input for writing a message
     @IBAction func longPress(sender: AnyObject) {
-        
         println("Long press")
         self.message.hidden = false
     }
+    
+    
+    //Unwind from the popover Segue
+    @IBAction func unwind(segue:UIStoryboardSegue){}
 }
+
+
+

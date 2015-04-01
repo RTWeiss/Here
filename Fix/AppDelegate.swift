@@ -112,3 +112,7 @@ extension UIColor{
     }
 }
 
+// MARK: - Typealiases
+
+typealias PingData = [String:AnyObject]
+typealias User = AnyObject
