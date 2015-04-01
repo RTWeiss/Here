@@ -42,6 +42,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <button key="tableHeaderView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QH1-pd-vMP">
+                            <rect key="frame" x="-23" y="-15" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="0.90784270464311956" blue="0.36998012163313432" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="Add New Friends">
+                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <segue destination="KOl-6k-Gzv" kind="show" id="gUg-wi-hTk"/>
+                            </connections>
+                        </button>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="friendsPaperCell" textLabel="Asj-BZ-vNj" style="IBUITableViewCellStyleDefault" id="9VX-bz-USd" customClass="BFPaperTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -73,7 +85,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G5n-36-VlK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2368" y="2066"/>
+            <point key="canvasLocation" x="2348" y="2066"/>
         </scene>
         <!--Ping Detail View Controller-->
         <scene sceneID="mZ2-Bp-Edo">
@@ -232,7 +244,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ez5-7H-hSK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2782" y="533"/>
+            <point key="canvasLocation" x="3050" y="2071"/>
         </scene>
         <!--Title-->
         <scene sceneID="ZPZ-CT-Dwh">
@@ -364,10 +376,10 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="coG-vr-7ca">
-                        <barButtonItem key="leftBarButtonItem" title="Add Friends" id="woE-zf-qJi">
+                        <barButtonItem key="leftBarButtonItem" title="Settings" id="woE-zf-qJi">
                             <connections>
                                 <action selector="toAddFriends:" destination="yap-du-poy" id="ZST-TU-hen"/>
-                                <segue destination="KOl-6k-Gzv" kind="show" id="rhV-8m-Zak"/>
+                                <segue destination="2U1-g5-Sai" kind="show" id="Jnf-of-TtG"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="0 Pings" id="iIh-IV-8Oc">
@@ -429,7 +441,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YiY-3a-CUM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="5Xj-zm-AAc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1643" y="2066"/>
+            <point key="canvasLocation" x="1205" y="1768"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="hCb-by-NMy">
+            <objects>
+                <viewController id="2U1-g5-Sai" customClass="SettingsViewController" customModule="Fix" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HgI-Nc-dTw"/>
+                        <viewControllerLayoutGuide type="bottom" id="gke-5g-xS1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8Jh-I0-Shk">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Settings" id="gTv-0Q-bbE">
+                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="27q-60-hMF">
+                            <color key="tintColor" red="1" green="0.152418628" blue="0.085917597639999996" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="LogOut:" destination="2U1-g5-Sai" id="kjN-RS-PfN"/>
+                                <segue destination="Ysx-RY-ehv" kind="presentation" identifier="logOut" id="mfX-ut-mId"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ghB-iX-ugE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2029" y="267"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="ek9-3I-SOf">

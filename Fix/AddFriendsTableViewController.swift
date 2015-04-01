@@ -25,8 +25,7 @@ class AddFriendsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        getContactsFromAddressBook()
+               getContactsFromAddressBook()
         
         if let user = meteor.collections["users"] as? M13OrderedDictionary {
             println(user.description)
@@ -35,6 +34,10 @@ class AddFriendsTableViewController: UITableViewController {
         
         
     }
+    
+
+    
+    
        // MARK: - Prompt
     
     @IBAction func add(sender: UIBarButtonItem) {

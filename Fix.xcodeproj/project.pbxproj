@@ -23,6 +23,7 @@
 		A29193D81ACB6FCA002732FD /* PingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193D01ACB6FCA002732FD /* PingsTableViewController.swift */; };
 		A29193D91ACB6FCA002732FD /* CampusTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193D11ACB6FCA002732FD /* CampusTableViewController.swift */; };
 		A29193DB1ACB8BB1002732FD /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193DA1ACB8BB1002732FD /* UserInfo.swift */; };
+		A2A1A1631ACC70CB007947E2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23C77081ACC700000A572D8 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		52DD42EAAFD813C7FCE1B3E0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B4709A18FCEC0C953DB9D6E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A23C77081ACC700000A572D8 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A24F0C411ACC2C3E00DAD2AF /* BFPaperTableViewCellWithPing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BFPaperTableViewCellWithPing.swift; sourceTree = "<group>"; };
 		A29193A41ACB6FB9002732FD /* Fix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A29193A81ACB6FB9002732FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				A29193CB1ACB6FCA002732FD /* AddFriendsTableViewController.swift */,
+				A23C77081ACC700000A572D8 /* SettingsViewController.swift */,
 				A29193CC1ACB6FCA002732FD /* FriendsListViewController.swift */,
 				A29193CD1ACB6FCA002732FD /* PingDetailViewController.swift */,
 				A29193CE1ACB6FCA002732FD /* LoginViewController.swift */,
@@ -308,6 +311,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2A1A1631ACC70CB007947E2 /* SettingsViewController.swift in Sources */,
 				A29193D61ACB6FCA002732FD /* LoginViewController.swift in Sources */,
 				A29193D81ACB6FCA002732FD /* PingsTableViewController.swift in Sources */,
 				A24F0C421ACC2C3E00DAD2AF /* BFPaperTableViewCellWithPing.swift in Sources */,

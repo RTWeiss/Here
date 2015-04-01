@@ -11,7 +11,6 @@ import MapKit
 import CoreLocation
 
 class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDelegate {
-    var initialLoad = true
     let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
     var passLong: Double!
     var passLat: Double!
@@ -50,10 +49,7 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
             if newValue != nil {
                 place.setTitle("\(newValue!) ▽", forState: .Normal)
                 self.navigationItem.title! = "\(newValue!) ▽"
-                if !initialLoad {
                     updatePingAndMap()
-                    initialLoad = false
-                }
             }
         }
         get {
@@ -63,6 +59,7 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
     
     
     func updatePingAndMap(){
+        if passLat != nil && passLong != nil {
         locationManager.startUpdatingLocation()
         self.currentLocation.removeAnnotations(currentLocation.annotations)
         
@@ -101,6 +98,7 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
         self.currentAnnotation = theLocationAnnotation
         self.currentLocation.addAnnotation(theLocationAnnotation)
         self.currentLocation.selectAnnotation(theLocationAnnotation, animated: true)
+        }
     }
     
 

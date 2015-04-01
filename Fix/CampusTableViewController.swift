@@ -145,12 +145,11 @@ class CampusTableViewController: UITableViewController {
                 
                 mvc.custom = true
                 if self.selected != -1 {
+                    
                     mvc.custom = false
-                    let dic = self.nearByVenues[self.selected]
-                    let lat = dic["lat"] as Double
-                    let long = dic["long"] as Double
-                    mvc.passLong         = long
-                    mvc.passLat = lat
+                    let dic = self.nearByVenues[selected]
+                    mvc.passLong  = dic["long"] as Double
+                    mvc.passLat = dic["lat"] as Double
                 }
                 mvc.currentPlace = self.tempPlace
             }
