@@ -242,16 +242,10 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
                     
                     let name = places["name"] as String
 
-                    let dic2 =  places["location"] as [String:AnyObject]
+                    let lat =  (places["location"] as [String:AnyObject])["lat"] as Double
                     
-                    let latString =  dic2["lat"] as Double
+                    let long =  (places["location"] as [String:AnyObject])["lng"] as Double
                     
-                    let lat = latString + 0
-                    
-                    let longString =  dic2["lng"] as Double
-                    
-                    let long = longString + 0
-   
                     self.nearByVenues.append(["location": name,"lat": lat, "long": long])
                     
                     if  self.nearByVenues.count == 1 {

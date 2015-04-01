@@ -135,8 +135,8 @@ class LoginViewController: UIViewController {
     }
     
     func handleSuccessfulAuth() {
+        
         if let error = Locksmith.saveData([email.text: password.text], forUserAccount: GlobalConstants.singleUserAccount){
-            
             println(error)
         } 
         performSegueWithIdentifier(StoryBoard.loggingInSegue, sender: nil)

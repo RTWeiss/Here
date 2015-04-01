@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //Todo: Take most meteor calls off the main  thread
     
     
-
     var meteorClient = initialiseMeteor("pre2", "ws://favor2.meteor.com/websocket") //"ws://localhost:3000/websocket"
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {

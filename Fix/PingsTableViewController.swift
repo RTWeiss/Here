@@ -36,7 +36,7 @@ class PingsTableViewController: UITableViewController {
             if pings.count != 0 {
                 pingList = pings
                 for ping in pings{
-                    let sender = ping["userName"] as String
+                    let sender = ping["userName"] as? String ?? "DefaultUserName"
                     let location = ping["location"] as String
                     let preview = "\(sender) @ \(location)"
                     self.preview.append(preview)
