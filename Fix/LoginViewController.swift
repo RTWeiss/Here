@@ -10,7 +10,7 @@ import UIKit
 
 
 class LoginViewController: UIViewController {
-    let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
     
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var email: UITextField!
@@ -18,7 +18,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var confirmPassword: UITextField!
     @IBOutlet weak var signUp: UIButton!
     
-    var meteor:MeteorClient!;
     var nickname: String!;
 
     
@@ -31,7 +30,7 @@ class LoginViewController: UIViewController {
         
         super.viewDidLoad()
         
-        self.meteor = appDelegate.meteorClient
+
         
         self.meteor.addObserver(self, forKeyPath: "websocketReady", options: NSKeyValueObservingOptions.New, context: nil)
         
@@ -85,3 +84,5 @@ class LoginViewController: UIViewController {
 
     
 }
+
+

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		692CCF3749DDFAD7ADCD08E9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52DD42EAAFD813C7FCE1B3E0 /* libPods.a */; };
+		A24F0C421ACC2C3E00DAD2AF /* BFPaperTableViewCellWithPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F0C411ACC2C3E00DAD2AF /* BFPaperTableViewCellWithPing.swift */; };
 		A29193AA1ACB6FB9002732FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193A91ACB6FB9002732FD /* AppDelegate.swift */; };
 		A29193AF1ACB6FB9002732FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A29193AD1ACB6FB9002732FD /* Main.storyboard */; };
 		A29193B11ACB6FBA002732FD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A29193B01ACB6FBA002732FD /* Images.xcassets */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		52DD42EAAFD813C7FCE1B3E0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B4709A18FCEC0C953DB9D6E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A24F0C411ACC2C3E00DAD2AF /* BFPaperTableViewCellWithPing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BFPaperTableViewCellWithPing.swift; sourceTree = "<group>"; };
 		A29193A41ACB6FB9002732FD /* Fix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A29193A81ACB6FB9002732FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A29193A91ACB6FB9002732FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				A29193CF1ACB6FCA002732FD /* MainViewController.swift */,
 				A29193D01ACB6FCA002732FD /* PingsTableViewController.swift */,
 				A29193D11ACB6FCA002732FD /* CampusTableViewController.swift */,
+				A24F0C411ACC2C3E00DAD2AF /* BFPaperTableViewCellWithPing.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 			files = (
 				A29193D61ACB6FCA002732FD /* LoginViewController.swift in Sources */,
 				A29193D81ACB6FCA002732FD /* PingsTableViewController.swift in Sources */,
+				A24F0C421ACC2C3E00DAD2AF /* BFPaperTableViewCellWithPing.swift in Sources */,
 				A29193D71ACB6FCA002732FD /* MainViewController.swift in Sources */,
 				A29193D21ACB6FCA002732FD /* bridge.m in Sources */,
 				A29193D91ACB6FCA002732FD /* CampusTableViewController.swift in Sources */,

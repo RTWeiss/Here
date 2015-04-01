@@ -11,7 +11,7 @@ import MapKit
 import CoreLocation
 
 class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDelegate {
-    
+    var initialLoad = true
     let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
     var passLong: Double!
     var passLat: Double!
@@ -28,7 +28,7 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
         }
     }
     
-    var  rawPing: NSMutableDictionary!
+    var  rawPing: PingData!
     var lat: CLLocationDegrees!
     var long: CLLocationDegrees!
     var  currentAnnotation: MKPointAnnotation!
@@ -46,14 +46,17 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
     
      var currentPlace: String? {
         set{
-            if currentPlace != nil {
-                self.place.titleLabel!.text = currentPlace
-                self.place.titleLabel!.text = self.place.titleLabel!.text! + " ▽"
-                updatePingAndMap()
+            if newValue != nil {
+                place.titleLabel!.text = "\(newValue!) ▽"
+                self.navigationItem.title! = "\(newValue!) ▽"
+                if !initialLoad {
+                    updatePingAndMap()
+                    initialLoad = false
+                }
             }
         }
         get {
-            return self.place.titleLabel!.text
+            return place.titleLabel!.text ?? "Here ▽"
         }
     }
     
@@ -63,7 +66,7 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
         self.currentLocation.removeAnnotations(currentLocation.annotations)
         
         if self.custom != true{
-            self.rawPing = ["lat": passLat, "long": passLong, "location": "\(currentPlace!)"]
+            rawPing = ["lat": passLat, "long": passLong, "location": "\(currentPlace!)"]
         } else {
             rawPing = ["lat": lat, "long": long, "location": "\(currentPlace!)"]
         }
@@ -111,29 +114,25 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
         custom = false
         message.hidden = true
 
-        let user = self.meteor.collections["users"] as M13OrderedDictionary
+        if let user = meteor.collections["users"] as? M13OrderedDictionary {
         NSLog(user.description)
         
         let userObject = user.objectAtIndex(0) as [String:AnyObject]
         let pingArray = userObject["Pings"] as [AnyObject]
         pingCount = "\(pingArray.count)"
-        
+            
+        }
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
+        currentPlace = "Here ▽"
         
-        if (currentPlace != nil) {
-            self.place.titleLabel!.text = currentPlace!
-            if self.place.titleLabel!.text == "Here ▽" {
-            }
-        }
-        
-        self.navigationItem.hidesBackButton = true
+
     }
-    
+
     
     func updateCount(){
         let user = self.meteor.collections["users"] as M13OrderedDictionary

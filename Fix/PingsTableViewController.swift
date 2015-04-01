@@ -15,12 +15,12 @@ class PingsTableViewController: UITableViewController {
     let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
     var pingList:[PingData]?
     var preview: [String] = []
-    var theOneThatWasClickedOn:Int!
+
     
     //StoryBoard Constants
     struct StoryBoard {
         static let pingsDetail = "pingsDetailCell"
-             static let pingsDetailSegue = "toPingsDetail"
+        static let pingsDetailSegue = "toPingsDetail"
     }
     
     override func viewDidLoad() {
@@ -34,7 +34,7 @@ class PingsTableViewController: UITableViewController {
             let user = users.objectAtIndex(0) as [String:User]
             let pings = user["Pings"] as [PingData]
             if pings.count != 0 {
-            pingList = pings
+                pingList = pings
                 for ping in pings{
                     let sender = ping["userName"] as String
                     let location = ping["location"] as String
@@ -49,7 +49,7 @@ class PingsTableViewController: UITableViewController {
             //May need to wait on subscriptions
         }
         self.navigationItem.title = "Current Pings"
-        self.tableView.registerClass(BFPaperTableViewCell.self, forCellReuseIdentifier: StoryBoard.pingsDetail)
+
         let  clearAllButton :UIBarButtonItem = UIBarButtonItem(title: "Clear All", style: .Plain, target: self, action: "clearAll")
         self.navigationItem.rightBarButtonItem = clearAllButton
     }
@@ -82,12 +82,12 @@ class PingsTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(StoryBoard.pingsDetail, forIndexPath: indexPath) as BFPaperTableViewCell
- 
+        let cell = tableView.dequeueReusableCellWithIdentifier(StoryBoard.pingsDetail, forIndexPath: indexPath) as BFPaperTableViewCellWithPing
+        
         cell.textLabel?.numberOfLines = 3
         cell.textLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
         
-
+        
         let author  = "2 hours ago"
         cell.textLabel?.text = "\(self.preview[indexPath.row]) \n \(author)"
         cell.textLabel?.textAlignment = NSTextAlignment.Center
@@ -97,29 +97,21 @@ class PingsTableViewController: UITableViewController {
         cell.rippleFromTapLocation = true
         cell.backgroundFadeColor = UIColor.paperColorBlue()
         cell.textLabel?.backgroundColor = UIColor.clearColor()
+        cell.ping = pingList![indexPath.row]
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let it: PingData = pingList?[indexPath.row] { //Fix type issue
-        let location = it["location"]
-        println("You selected location: \(location)!")
-        self.theOneThatWasClickedOn = indexPath.row
-        self.performSegueWithIdentifier("pingsDetail", sender: self)
-        }
-    }
     
-
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 70
     }
     
-
+    
     
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -129,24 +121,24 @@ class PingsTableViewController: UITableViewController {
             self.preview.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             if let dict = self.pingList?[indexPath.row]{
-            var parameters = ["\(self.meteor.userId)"]
-            let it = dict["_id"]
-            parameters.append("\(it)")
-         
-            
-            println(parameters.description)
+                var parameters = ["\(self.meteor.userId)"]
+                let it = dict["_id"]
+                parameters.append("\(it)")
                 
-            self.meteor.callMethodName("removePing", parameters:parameters){( response,  error) in
-                if (error != nil) {
-                    NSLog("failed")
-                    return
+                
+                println(parameters.description)
+                
+                self.meteor.callMethodName("removePing", parameters:parameters){( response,  error) in
+                    if (error != nil) {
+                        NSLog("failed")
+                        return
+                    }
+                    NSLog("sucess")
+                    
                 }
-                NSLog("sucess")
                 
+                NSLog("Deleting row")
             }
-
-            NSLog("Deleting row")
-        }
         }
     }
     
@@ -158,12 +150,15 @@ class PingsTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == StoryBoard.pingsDetailSegue {
             if let pdvc = segue.destinationViewController.contentViewController as? PingDetailViewController{
-                pdvc.ping = self.pingList![theOneThatWasClickedOn]
+                if let cell = sender as? BFPaperTableViewCellWithPing {
+                    if let ping = cell.ping  {
+                        pdvc.ping = ping
+                    }
+                }
+                
             }
-            
         }
+        
     }
     
-    
-
 }

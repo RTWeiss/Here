@@ -116,3 +116,4 @@ extension UIColor{
 
 typealias PingData = [String:AnyObject]
 typealias User = AnyObject
+typealias Friends = AnyObject

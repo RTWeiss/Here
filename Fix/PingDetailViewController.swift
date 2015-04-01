@@ -18,11 +18,14 @@ class PingDetailViewController: UIViewController, MKMapViewDelegate{
     var ping: PingData!
     
     @IBOutlet weak var pingLocation: MKMapView!
-    @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var placeLabel: UILabel!
     
     // MARK: VC LifeCycle
     
+    @IBAction func dismiss(sender: UIBarButtonItem) {
+        println("Delete the ping")
+        self.navigationController?.popViewControllerAnimated(true)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         var latitude  = self.ping["lat"] as CLLocationDegrees
@@ -40,7 +43,7 @@ class PingDetailViewController: UIViewController, MKMapViewDelegate{
         theLocationAnnotation.subtitle = self.ping["location"] as String
         
         self.pingLocation.addAnnotation(theLocationAnnotation)
-        self.userLabel.text = self.ping["userName"] as? String
+        navigationItem.title = self.ping["userName"] as? String
         self.placeLabel.text = self.ping["location"] as? String
         self.message.text = self.ping["message"] as? String
     }
