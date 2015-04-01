@@ -42,6 +42,7 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
     private struct StoryBoard {
         static let toFriendsList = "toFriendsList"
         static let settingsPopover = "settingsPopover"
+        static let defaultLocation = "Select Location"
     }
     
      var currentPlace: String? {
@@ -56,7 +57,7 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
             }
         }
         get {
-            return place.titleLabel!.text ?? "Here ▽"
+            return place.titleLabel!.text ?? StoryBoard.defaultLocation
         }
     }
     
@@ -129,7 +130,7 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
-        currentPlace = "Here"
+        currentPlace = StoryBoard.defaultLocation
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateCount", name: "users_added", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateCount", name: "users_removed", object: nil)
