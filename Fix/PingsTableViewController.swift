@@ -122,9 +122,9 @@ class PingsTableViewController: UITableViewController {
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             if let dict = self.pingList?[indexPath.row]{
                 var parameters = ["\(self.meteor.userId)"]
-                let it = dict["_id"]
+                let temp = dict["_id"]
                 
-                parameters.append("\(it)")
+                parameters.append("\(temp)")
                 
                 println(parameters.description)
                 

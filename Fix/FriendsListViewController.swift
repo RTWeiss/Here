@@ -23,6 +23,9 @@ class FriendsListViewController: UITableViewController {
     struct StoryBoard {
         static let friendsBFPaperCell = "friendsPaperCell"
     }
+    
+    
+    // MARK: VC LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         if let user = meteor.collections["users"] as? M13OrderedDictionary{
@@ -32,23 +35,6 @@ class FriendsListViewController: UITableViewController {
         }
     }
     
-    @IBAction func send(sender: UIBarButtonItem) {
-        if selected.count != 0{
-            
-            //Get rid of NS dictionary and use map instead
-            for number in ((selected as NSDictionary).allValues as [Int]) {
-                usersToPing.append(friendsList[number]["userId"] as String)
-            }
-            
-            add()
-            println("Sending the pings")
-            
-        } else {
-            var alert = UIAlertController(title: "No friends Selected", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Select Friends", style: UIAlertActionStyle.Cancel, handler: nil))
-            presentViewController(alert, animated: true, completion: nil)
-        }
-    }
     
     
     // MARK: - Table view data source
@@ -93,6 +79,27 @@ class FriendsListViewController: UITableViewController {
         }
     }
     
+    
+    
+    // MARK: Meteor Calls
+    
+    @IBAction func send(sender: UIBarButtonItem) {
+        if selected.count != 0{
+            
+            //Get rid of NS dictionary and use map instead
+            for number in ((selected as NSDictionary).allValues as [Int]) {
+                usersToPing.append(friendsList[number]["userId"] as String)
+            }
+            
+            add()
+            println("Sending the pings")
+            
+        } else {
+            var alert = UIAlertController(title: "No friends Selected", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Select Friends", style: UIAlertActionStyle.Cancel, handler: nil))
+            presentViewController(alert, animated: true, completion: nil)
+        }
+    }
     
     
     private func add(){

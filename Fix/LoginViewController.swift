@@ -30,8 +30,6 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         self.meteor.addObserver(self, forKeyPath: "connected", options: NSKeyValueObservingOptions.New, context: nil)
         self.confirmPassword.hidden = true
-        
-        
     }
     
     
@@ -40,6 +38,8 @@ class LoginViewController: UIViewController {
         meteor.addObserver(self, forKeyPath:"websocketReady", options: observingOption, context:nil)
     }
     
+    
+    // MARK: Observers
     
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<()>) {
         
@@ -54,6 +54,9 @@ class LoginViewController: UIViewController {
             }
         }
     }
+    
+    
+    // MARK: Signup & Login Actions
     
     @IBAction private func signUp(sender: UIButton) {
         if self.confirmPassword.hidden {

@@ -19,9 +19,13 @@ class AddFriendsTableViewController: UITableViewController {
     private var newWordField: UITextField!
     @IBOutlet var friendListTable: UITableView!
     
+   //Constants
    private struct StoryBoard {
         static let AdressBookBFPaperCell = "AdressBookBFPaperCell"
     }
+    
+    
+    // MARK: VC LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +42,7 @@ class AddFriendsTableViewController: UITableViewController {
 
     
     
-       // MARK: - Prompt
+    // MARK: - Prompt
     
     @IBAction func add(sender: UIBarButtonItem) {
         var alert = UIAlertController(title: "Search for Friend", message: "Enter User Name", preferredStyle: UIAlertControllerStyle.Alert)
@@ -49,14 +53,14 @@ class AddFriendsTableViewController: UITableViewController {
         
     }
     
-    func configurationTextField(textField: UITextField!){
+    private func configurationTextField(textField: UITextField!){
         println("configurat hire the TextField")
         // add the text field and make the result global
         textField.placeholder = "Username"
         self.newWordField = textField
     }
     
-    func wordEntered(alert: UIAlertAction!){
+    private func wordEntered(alert: UIAlertAction!){
         var textView2 = self.newWordField.text
         if textView2 != ""{
             
@@ -83,7 +87,7 @@ class AddFriendsTableViewController: UITableViewController {
     }
     
     
-    func handleCancel(alertView: UIAlertAction!)
+   private func handleCancel(alertView: UIAlertAction!)
     {
         println("User click Cancel button")
         // println(self.textField.text)

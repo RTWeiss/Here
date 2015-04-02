@@ -63,7 +63,49 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
     }
     
     
-    func updatePingAndMap(){
+    // MARK: VC LifeCycle
+    
+    func viewWillAppear(animated: Bool) () {
+        self.message.text = ""
+        updateCount()
+    }
+    
+    //    override func viewDidDisappear(){
+    //        //stop updating location to save battery life
+    //        locationManager.stopUpdatingLocation()
+    //    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        custom = false
+        message.hidden = true
+        
+        //        if let user = meteor.collections["users"] as? M13OrderedDictionary {
+        //        println(user.description)
+        //
+        //        let userObject = user.objectAtIndex(0) as [String:AnyObject]
+        //        let pingArray = userObject["Pings"] as [AnyObject]
+        //        pingCount = "\(pingArray.count)"
+        //
+        //        }
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
+        
+        currentPlace = StoryBoard.defaultLocation
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateCount", name: "users_added", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateCount", name: "users_removed", object: nil)
+        
+        
+    }
+    
+    // MARK: - Update UI
+    
+    private func updatePingAndMap(){
         if passLat != nil && passLong != nil {
             locationManager.startUpdatingLocation()
             self.currentLocation.removeAnnotations(currentLocation.annotations)
@@ -107,45 +149,6 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
     }
     
     
-    func viewWillAppear(animated: Bool) () {
-        self.message.text = ""
-        updateCount()
-    }
-    
-    //    override func viewDidDisappear(){
-    //        //stop updating location to save battery life
-    //        locationManager.stopUpdatingLocation()
-    //    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        custom = false
-        message.hidden = true
-        
-        //        if let user = meteor.collections["users"] as? M13OrderedDictionary {
-        //        println(user.description)
-        //
-        //        let userObject = user.objectAtIndex(0) as [String:AnyObject]
-        //        let pingArray = userObject["Pings"] as [AnyObject]
-        //        pingCount = "\(pingArray.count)"
-        //
-        //        }
-        
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
-        locationManager.startUpdatingLocation()
-        
-        currentPlace = StoryBoard.defaultLocation
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateCount", name: "users_added", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateCount", name: "users_removed", object: nil)
-        
-        
-    }
-    
-    
     private func updateCount(){
         let user = self.meteor.collections["users"] as M13OrderedDictionary
         let userObject = user.objectAtIndex(0) as [String:AnyObject]
@@ -153,6 +156,28 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
         pingCount = "\(pingArray.count)"
     }
     
+    
+    private func updateLocButton(){
+        if (!self.runOnce){
+            
+            let selectedVenueText = self.nearByVenues[0]["location"] as String
+            self.place.titleLabel!.text = "\(selectedVenueText)"
+            self.place.titleLabel!.text = self.place.titleLabel!.text! + " ▽"
+            self.runOnce = true
+        }
+    }
+    
+    
+    //Shows use the input for writing a message
+    @IBAction private func longPress(sender: AnyObject) {
+        println("Long press")
+        self.message.hidden = false
+    }
+    
+    
+    
+    
+    // MARK: - Location
     
     func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
         NSLog("Error while updating location %@",error.localizedDescription)
@@ -214,22 +239,6 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == StoryBoard.toFriendsList {
-            if let flvc = segue.destinationViewController.contentViewController as? FriendsListViewController{
-                rawPing["message"] = self.message.text
-                flvc.rawPing = self.rawPing
-            }
-        }
-        
-        if segue.identifier == StoryBoard.settingsPopover {
-            if let ctvc = segue.destinationViewController.contentViewController as? CampusTableViewController{
-                ctvc.nearByVenues  = self.nearByVenues
-            }
-            
-        }
-    }
     
     
     
@@ -273,25 +282,29 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
         
     }
     
-    private func updateLocButton(){
-        if (!self.runOnce){
-            
-            let selectedVenueText = self.nearByVenues[0]["location"] as String
-            self.place.titleLabel!.text = "\(selectedVenueText)"
-            self.place.titleLabel!.text = self.place.titleLabel!.text! + " ▽"
-            self.runOnce = true
-        }
-    }
-    
-    //Shows use the input for writing a message
-    @IBAction private func longPress(sender: AnyObject) {
-        println("Long press")
-        self.message.hidden = false
-    }
-    
+    // MARK: - Navigation
     
     //Unwind from the popover Segue
     @IBAction func unwind(segue:UIStoryboardSegue){}
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == StoryBoard.toFriendsList {
+            if let flvc = segue.destinationViewController.contentViewController as? FriendsListViewController{
+                rawPing["message"] = self.message.text
+                flvc.rawPing = self.rawPing
+            }
+        }
+        
+        if segue.identifier == StoryBoard.settingsPopover {
+            if let ctvc = segue.destinationViewController.contentViewController as? CampusTableViewController{
+                ctvc.nearByVenues  = self.nearByVenues
+            }
+            
+        }
+    }
+    
 }
 
 
