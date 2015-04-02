@@ -48,7 +48,7 @@ class CampusTableViewController: UITableViewController {
     
     // MARK: - Custom Location
     
-    func add(){
+    private func add(){
         var alert = UIAlertController(title: "Custom Location", message: "Enter your current location", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addTextFieldWithConfigurationHandler(configurationTextField)
         alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Cancel, handler:handleCancel))
@@ -56,13 +56,13 @@ class CampusTableViewController: UITableViewController {
         self.presentViewController(alert, animated: true) {}
     }
     
-    func configurationTextField(textField: UITextField!){
+    private func configurationTextField(textField: UITextField!){
         textField.placeholder = "Place"
         self.newWordField = textField
     }
     
     
-    func wordEntered(alert: UIAlertAction!){
+    private func wordEntered(alert: UIAlertAction!){
         var textView2 = self.newWordField.text
         if textView2 != ""{
             println("You selected location: \(textView2)")
@@ -72,7 +72,7 @@ class CampusTableViewController: UITableViewController {
         self.performSegueWithIdentifier(StoryBoard.returnSegue, sender: self)
     }
     
-    func handleCancel(alertView: UIAlertAction!){
+    private func handleCancel(alertView: UIAlertAction!){
         println("User click Cancel button")
     }
     
@@ -141,7 +141,7 @@ class CampusTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == StoryBoard.returnSegue {
             
-            if let mvc = segue.destinationViewController as? MainViewController {
+            if let mvc = segue.destinationViewController.contentViewController as? MainViewController {
                 
                 mvc.custom = true
                 if self.selected != -1 {

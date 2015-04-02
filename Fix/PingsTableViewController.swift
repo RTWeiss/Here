@@ -56,7 +56,7 @@ class PingsTableViewController: UITableViewController {
     
     
     
-    func clearAll(){
+    private func clearAll(){
         NSLog("Clearing ALl")
         self.meteor.callMethodName("removeAllPings", parameters:nil, responseCallback:{( response,  error) in
             if error != nil {
@@ -123,8 +123,8 @@ class PingsTableViewController: UITableViewController {
             if let dict = self.pingList?[indexPath.row]{
                 var parameters = ["\(self.meteor.userId)"]
                 let it = dict["_id"]
-                parameters.append("\(it)")
                 
+                parameters.append("\(it)")
                 
                 println(parameters.description)
                 
@@ -141,7 +141,6 @@ class PingsTableViewController: UITableViewController {
             }
         }
     }
-    
     
     
     
