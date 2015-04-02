@@ -95,7 +95,7 @@ class FriendsListViewController: UITableViewController {
     
     
     
-    func add(){
+    private func add(){
         
         if let user = meteor.collections["users"] as? M13OrderedDictionary {
             

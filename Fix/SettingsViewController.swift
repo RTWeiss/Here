@@ -9,10 +9,10 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-
-   
     
-     private let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
+    
+    
+    private let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
     @IBAction func LogOut(sender: UIBarButtonItem) {
         meteor.logout()
         let error = Locksmith.deleteDataForUserAccount(GlobalConstants.singleUserAccount)
@@ -25,7 +25,7 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
-}
+        
+    }
 }

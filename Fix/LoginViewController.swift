@@ -55,7 +55,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @IBAction func signUp(sender: UIButton) {
+    @IBAction private func signUp(sender: UIButton) {
         if self.confirmPassword.hidden {
             //Show hidden field
             self.confirmPassword.hidden = false
@@ -117,7 +117,7 @@ class LoginViewController: UIViewController {
         signIn()
     }
     
-    func signIn(){
+    private func signIn(){
         if !meteor.websocketReady {
             let notConnectedAlert = UIAlertView(title: "Connection Error", message: "Can't find the server, try again", delegate: nil, cancelButtonTitle: "OK")
             notConnectedAlert.show()
@@ -134,7 +134,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    func handleSuccessfulAuth() {
+    private func handleSuccessfulAuth() {
         
         if let error = Locksmith.saveData([email.text: password.text], forUserAccount: GlobalConstants.singleUserAccount){
             println(error)
@@ -143,7 +143,7 @@ class LoginViewController: UIViewController {
         
     }
     
-    func handleFailedAuth(error: NSError) {
+   private func handleFailedAuth(error: NSError) {
         UIAlertView(title: "Here", message:error.localizedDescription, delegate: nil, cancelButtonTitle: "Try Again").show()
     }
 
