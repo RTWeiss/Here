@@ -14,7 +14,7 @@ class AddFriendsTableViewController: UITableViewController {
     
     private var addressBook: ABAddressBookRef?
     private var nameArray: [String] = []
-    private let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
+    private let meteor = (UIApplication.sharedApplication().delegate as! AppDelegate).meteorClient
     var FriendsList:[Friends]!
     private var newWordField: UITextField!
     @IBOutlet var friendListTable: UITableView!
@@ -33,7 +33,7 @@ class AddFriendsTableViewController: UITableViewController {
         
         if let user = meteor.collections["users"] as? M13OrderedDictionary {
             println(user.description)
-            FriendsList = user.objectAtIndex(0)["FriendsList"] as [Friends]
+            FriendsList = user.objectAtIndex(0)["FriendsList"] as! [Friends]
         }
         
         
@@ -108,7 +108,7 @@ class AddFriendsTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(StoryBoard.AdressBookBFPaperCell, forIndexPath: indexPath) as BFPaperTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(StoryBoard.AdressBookBFPaperCell, forIndexPath: indexPath) as! BFPaperTableViewCell
         
         cell.textLabel?.text = nameArray[indexPath.row]
         cell.textLabel?.textAlignment = NSTextAlignment.Center
@@ -123,7 +123,7 @@ class AddFriendsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as BFPaperTableViewCell
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! BFPaperTableViewCell
         var parameters = [self.nameArray[indexPath.row],"sfgargsdth"]
         
         self.meteor.callMethodName("verifyUser", parameters:parameters, responseCallback:{(response,  error) in
@@ -189,7 +189,7 @@ class AddFriendsTableViewController: UITableViewController {
             nameArray.append(contactName)
             var multi: ABMultiValueRef = ABRecordCopyValue(record, kABPersonPhoneProperty).takeRetainedValue()
             for ( var j:CFIndex = 0;  j < ABMultiValueGetCount(multi);  j++) {
-                let  phone = ABMultiValueCopyValueAtIndex(multi, j).takeRetainedValue() as String
+                let  phone = ABMultiValueCopyValueAtIndex(multi, j).takeRetainedValue() as! String
                 numbersArray.append(phone)
                 println(phone)
             }

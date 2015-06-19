@@ -22,9 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         
-        self.meteorClient.addSubscription("posts3", withParameters: [["limit":15]])
-        self.meteorClient.addSubscription("userData")
-        self.meteorClient.addSubscription("interestPosts", withParameters:[[ "_id": "6S7jSnGWp2WBEmndf"]] )
+        meteorClient.addSubscription("posts3", withParameters: [["limit":15]])
+        meteorClient.addSubscription("userData")
+        meteorClient.addSubscription("interestPosts", withParameters:[[ "_id": "6S7jSnGWp2WBEmndf"]] )
     
 
         
@@ -33,7 +33,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
   
         Foursquare2.setupFoursquareWithClientId("Z5VHHCGCOEZABPWIZ5C0YHKOUOBRU4RGT3XA50PXRF0OFCJR", secret:"2TU3RFC0ZXYAC2GISP4YIMHAWYTOLU1CH4U1HE1TKJOYMI4K", callbackURL:"https://here123://foursquare");
+        //meteorClient.addObserver(self, forKeyPath: "connected", options: NSKeyValueObservingOptions.New, context: nil)
         
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let startViewController = storyboard.instantiateViewControllerWithIdentifier("MainViewController") as! UIViewController
+        
+        //self.window?.rootViewController!.presentViewController(startViewController, animated:true, completion:nil)
+        
+        
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.window?.rootViewController = startViewController;
+        self.window?.makeKeyAndVisible()
         
         return true
     }

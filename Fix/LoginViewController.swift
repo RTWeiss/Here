@@ -10,7 +10,7 @@ import UIKit
 
 
 class LoginViewController: UIViewController {
-    private let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
+    private let meteor = (UIApplication.sharedApplication().delegate as! AppDelegate).meteorClient
     
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var email: UITextField!
@@ -28,7 +28,6 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.meteor.addObserver(self, forKeyPath: "connected", options: NSKeyValueObservingOptions.New, context: nil)
         self.confirmPassword.hidden = true
     }
     
@@ -46,8 +45,8 @@ class LoginViewController: UIViewController {
         if (keyPath == "connected" && meteor.websocketReady) {
             let (dictionary, error) = Locksmith.loadDataForUserAccount(GlobalConstants.singleUserAccount)
             if let result = dictionary {
-                email.text = (result.allKeys as [String]).last
-                password.text = (result.allValues as [String]).last
+                email.text = (result.allKeys as! [String]).last
+                password.text = (result.allValues as! [String]).last
                 signIn()
             } else {
                 println(error)

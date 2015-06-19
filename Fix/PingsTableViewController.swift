@@ -12,7 +12,7 @@ import UIKit
 class PingsTableViewController: UITableViewController {
     var experiment:UIViewController!
     private  var userInfo:String!
-    private  let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
+    private  let meteor = (UIApplication.sharedApplication().delegate as! AppDelegate).meteorClient
     var pingList:[PingData]?
     private  var preview: [String] = []
     
@@ -31,13 +31,13 @@ class PingsTableViewController: UITableViewController {
         
         
         if  let users = self.meteor.collections["users"] as? M13OrderedDictionary {
-            let user = users.objectAtIndex(0) as [String:User]
-            let pings = user["Pings"] as [PingData]
+            let user = users.objectAtIndex(0) as! [String:User]
+            let pings = user["Pings"] as! [PingData]
             if pings.count != 0 {
                 pingList = pings
                 for ping in pings{
                     let sender = ping["userName"] as? String ?? "DefaultUserName"
-                    let location = ping["location"] as String
+                    let location = ping["location"] as! String
                     let preview = "\(sender) @ \(location)"
                     self.preview.append(preview)
                 }
@@ -82,7 +82,7 @@ class PingsTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(StoryBoard.pingsDetail, forIndexPath: indexPath) as BFPaperTableViewCellWithPing
+        let cell = tableView.dequeueReusableCellWithIdentifier(StoryBoard.pingsDetail, forIndexPath: indexPath) as! BFPaperTableViewCellWithPing
         
         cell.textLabel?.numberOfLines = 3
         cell.textLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping

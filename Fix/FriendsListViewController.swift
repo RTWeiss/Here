@@ -12,7 +12,7 @@ class FriendsListViewController: UITableViewController {
     
     
     
-    private let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
+    private let meteor = (UIApplication.sharedApplication().delegate as! AppDelegate).meteorClient
     var friendsList:[Friends]!
     private var selected: [String:Int] = [:]
     private var usersToPing: [String] = []
@@ -30,7 +30,7 @@ class FriendsListViewController: UITableViewController {
         super.viewDidLoad()
         if let user = meteor.collections["users"] as? M13OrderedDictionary{
             println(user.description)
-            friendsList = user.objectAtIndex(0)["FriendsList"] as [Friends]
+            friendsList = user.objectAtIndex(0)["FriendsList"] as! [Friends]
             
         }
     }
@@ -49,11 +49,11 @@ class FriendsListViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(StoryBoard.friendsBFPaperCell, forIndexPath: indexPath) as BFPaperTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(StoryBoard.friendsBFPaperCell, forIndexPath: indexPath) as! BFPaperTableViewCell
         
         
         
-        let cellText = (friendsList[indexPath.row] as NSDictionary).valueForKey("userId")
+        let cellText = (friendsList[indexPath.row] as! NSDictionary).valueForKey("userId")
         cell.textLabel?.text = "\(cellText!)"
         cell.textLabel?.textAlignment = NSTextAlignment.Center
         cell.textLabel?.textColor = UIColor.blackColor()
@@ -68,7 +68,7 @@ class FriendsListViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as BFPaperTableViewCell
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as!BFPaperTableViewCell
         
         if  selected["\(indexPath.row)"] != nil {
             selected.removeValueForKey("\(indexPath.row)")
@@ -87,8 +87,8 @@ class FriendsListViewController: UITableViewController {
         if selected.count != 0{
             
             //Get rid of NS dictionary and use map instead
-            for number in ((selected as NSDictionary).allValues as [Int]) {
-                usersToPing.append(friendsList[number]["userId"] as String)
+            for number in ((selected as NSDictionary).allValues as! [Int]) {
+                usersToPing.append(friendsList[number]["userId"] as! String)
             }
             
             add()
@@ -112,7 +112,7 @@ class FriendsListViewController: UITableViewController {
             
             let parameters = [usersToPing, rawPing] as NSArray
             
-            meteor.callMethodName("addPing", parameters: parameters, responseCallback:{( response,  error) in
+            meteor.callMethodName("addPing", parameters: parameters as [AnyObject], responseCallback:{( response,  error) in
                 if (error != nil) {
                     println("failed")
                     return

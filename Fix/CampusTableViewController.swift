@@ -14,7 +14,7 @@ class CampusTableViewController: UITableViewController {
     
     private var tempPlace:NSString! {
         didSet{
-            currentDisplayLocation.text = tempPlace
+            currentDisplayLocation.text = tempPlace as! String
         }
     }
     private var newWordField: UITextField!
@@ -67,7 +67,7 @@ class CampusTableViewController: UITableViewController {
         if textView2 != ""{
             println("You selected location: \(textView2)")
             self.tempPlace = "\(textView2)"
-            self.currentDisplayLocation.text =  self.tempPlace
+            self.currentDisplayLocation.text =  self.tempPlace as! String
         }
         self.performSegueWithIdentifier(StoryBoard.returnSegue, sender: self)
     }
@@ -83,7 +83,7 @@ class CampusTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = self.tableView.dequeueReusableCellWithIdentifier(StoryBoard.locationCell) as UITableViewCell
+        var cell = self.tableView.dequeueReusableCellWithIdentifier(StoryBoard.locationCell) as! UITableViewCell
         
         if indexPath.row == 0 {
             cell.textLabel?.text = "Custom"
@@ -115,7 +115,7 @@ class CampusTableViewController: UITableViewController {
             self.selected = -1
             add()
         } else {
-            let location = self.nearByVenues[indexPath.row - 1]["location"] as String
+            let location = self.nearByVenues[indexPath.row - 1]["location"] as! String
             println("You selected location: \(location)")
             
             tempPlace = "\(location)"
@@ -148,10 +148,10 @@ class CampusTableViewController: UITableViewController {
                     
                     mvc.custom = false
                     let dic = self.nearByVenues[selected]
-                    mvc.passLong  = dic["long"] as Double
-                    mvc.passLat = dic["lat"] as Double
+                    mvc.passLong  = dic["long"] as! Double
+                    mvc.passLat = dic["lat"] as! Double
                 }
-                mvc.currentPlace = self.tempPlace
+                mvc.currentPlace = self.tempPlace as! String
             }
             
         }

@@ -236,6 +236,7 @@
 		A291939C1ACB6FB9002732FD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = Zleman;
 				TargetAttributes = {

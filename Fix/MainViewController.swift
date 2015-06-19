@@ -12,7 +12,7 @@ import CoreLocation
 
 class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDelegate {
     
-    private let meteor = (UIApplication.sharedApplication().delegate as AppDelegate).meteorClient
+    private let meteor = (UIApplication.sharedApplication().delegate as! AppDelegate).meteorClient
     
     var passLong: Double!
     var passLat: Double!
@@ -150,9 +150,9 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
     
     
     private func updateCount(){
-        let user = self.meteor.collections["users"] as M13OrderedDictionary
-        let userObject = user.objectAtIndex(0) as [String:AnyObject]
-        let pingArray = userObject["Pings"] as [AnyObject]
+        let user = self.meteor.collections["users"] as! M13OrderedDictionary
+        let userObject = user.objectAtIndex(0) as! [String:AnyObject]
+        let pingArray = userObject["Pings"] as! [AnyObject]
         pingCount = "\(pingArray.count)"
     }
     
@@ -160,7 +160,7 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
     private func updateLocButton(){
         if (!self.runOnce){
             
-            let selectedVenueText = self.nearByVenues[0]["location"] as String
+            let selectedVenueText = self.nearByVenues[0]["location"] as! String
             self.place.titleLabel!.text = "\(selectedVenueText)"
             self.place.titleLabel!.text = self.place.titleLabel!.text! + " ▽"
             self.runOnce = true
@@ -187,7 +187,7 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         CLGeocoder().reverseGeocodeLocation(manager.location) {(placemarks, error)-> Void in
             println("\(locations.count)")
-            let coor = locations[0] as CLLocation
+            let coor = locations[0] as! CLLocation
             let latitude = coor.coordinate.latitude
             let longitude = coor.coordinate.longitude
             NSLog(longitude.description)
@@ -202,7 +202,7 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
             }
             
             if placemarks.count > 0 {
-                let pm = placemarks[0] as CLPlacemark
+                let pm = placemarks[0] as! CLPlacemark
                 self.displayLocationInfo(pm)
             } else {
                 NSLog("Problem with the data received from geocoder")
@@ -254,15 +254,15 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
             
             if (success) {
                 
-                let venuesObject = ((venues as [String:AnyObject])["response"] as [String:AnyObject])["venues"] as [[String:AnyObject]]
+                let venuesObject = ((venues as! [String:AnyObject])["response"] as! [String:AnyObject])["venues"] as! [[String:AnyObject]]
                 
                 for places in venuesObject {
                     
-                    let name = places["name"] as String
+                    let name = places["name"] as! String
                     
-                    let lat =  (places["location"] as [String:AnyObject])["lat"] as Double
+                    let lat =  (places["location"] as! [String:AnyObject])["lat"] as! Double
                     
-                    let long =  (places["location"] as [String:AnyObject])["lng"] as Double
+                    let long =  (places["location"] as! [String:AnyObject])["lng"] as! Double
                     
                     self.nearByVenues.append(["location": name,"lat": lat, "long": long])
                     

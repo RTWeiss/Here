@@ -28,8 +28,8 @@ class PingDetailViewController: UIViewController, MKMapViewDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let latitude  = ping["lat"] as CLLocationDegrees
-        let longitude  = ping["long"] as CLLocationDegrees
+        let latitude  = ping["lat"] as! CLLocationDegrees
+        let longitude  = ping["long"] as! CLLocationDegrees
         let latDelta:CLLocationDegrees = 0.001
         let longDelta:CLLocationDegrees = 0.001
         let theSpan:MKCoordinateSpan = MKCoordinateSpanMake(latDelta, longDelta)
@@ -39,8 +39,8 @@ class PingDetailViewController: UIViewController, MKMapViewDelegate{
         
         let theLocationAnnotation = MKPointAnnotation()
         theLocationAnnotation.coordinate = location
-        theLocationAnnotation.title = ping["location"] as String
-        theLocationAnnotation.subtitle = ping["location"] as String
+        theLocationAnnotation.title = ping["location"] as! String
+        theLocationAnnotation.subtitle = ping["location"]as! String
         
         pingLocation.addAnnotation(theLocationAnnotation)
         navigationItem.title = ping["userName"] as? String
