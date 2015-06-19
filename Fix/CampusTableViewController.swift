@@ -32,11 +32,7 @@ class CampusTableViewController: UITableViewController {
     
     private  var items:[Dictionary<String,Any>] = [["location":"Afam","lat":43.9065640, "long": -69.9636130],["location":"Baxter","lat":43.9064296, "long": -69.9625026],["location":"Brunswick Apartments","lat":43.90372897121463, "long":-69.96564025059342 ],["location":"Smith Union","lat":43.9082345, "long":-69.9603166 ],["location":"West","lat":43.9056711, "long":-69.9617176 ],["location":"Farley FieldHouse","lat":43.9028226, "long":-69.9598669 ],["location":"Osher","lat":43.9057581, "long":-69.9611919 ],["location":"West","lat":43.9056711, "long":-69.9617176 ]]
     
-    //["location":"Druckenmiller","lat":, "long": ]["location":"Burnett","lat":, "long": ],["location":"Helmreich","lat":, "long": ],["location":"Howell","lat":, "long": ],["location":"Ladd","lat":, "long": ],["location":"MacMillan","lat":, "long": ],["location":"Quinby","lat":, "long": ],["location":"Reed","lat":, "long": ],["location":"Brunswick Apartment's Quad","lat":, "long": ],["location":"Hyde","lat":, "long": ],//,["location":"Appleton","lat":, "long": ],["location":"Coleman","lat":, "long": ],["location":"Winthrop","lat":, "long": ],["location":"Moore","lat":, "long": ],["location":"Maine","lat":, "long": ]]
-    //["location":"Crack","lat":12, "long":12 ]
-    //  var self.nearByVenues = ["Afam", "Baxter","Burnett","Druckenmiller", "Farley FieldHouse","Helmreich","Howell","Ladd","MacMillan","Quinby","Reed", "Smith Union","Crack", "Quad","Brunswick Apartment's Quad","Hyde", "Osher","West","Appleton","Coleman","Winthrop","Moore", "Maine"]
-    
-    
+
     // MARK: VC LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -12,8 +12,6 @@ import CoreLocation
 
 class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDelegate {
     
-    private let meteor = (UIApplication.sharedApplication().delegate as! AppDelegate).meteorClient
-    
     var passLong: Double!
     var passLat: Double!
     
@@ -53,7 +51,7 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
         set{
             if newValue != nil {
                 place.setTitle("\(newValue!) ▽", forState: .Normal)
-                //self.navigationItem.title! = "\(newValue!) ▽"
+                // navigationItem.title! = "\(newValue!) ▽"
                 updatePingAndMap()
             }
         }
@@ -66,30 +64,17 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
     // MARK: VC LifeCycle
     
     func viewWillAppear(animated: Bool) () {
-        self.message.text = ""
-        updateCount()
+         message.text = ""
     }
     
-    //    override func viewDidDisappear(){
-    //        //stop updating location to save battery life
-    //        locationManager.stopUpdatingLocation()
-    //    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         custom = false
         message.hidden = true
         
-        //        if let user = meteor.collections["users"] as? M13OrderedDictionary {
-        //        println(user.description)
-        //
-        //        let userObject = user.objectAtIndex(0) as [String:AnyObject]
-        //        let pingArray = userObject["Pings"] as [AnyObject]
-        //        pingCount = "\(pingArray.count)"
-        //
-        //        }
-        
+
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
@@ -108,9 +93,9 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
     private func updatePingAndMap(){
         if passLat != nil && passLong != nil {
             locationManager.startUpdatingLocation()
-            self.currentLocation.removeAnnotations(currentLocation.annotations)
+             currentLocation.removeAnnotations(currentLocation.annotations)
             
-            if self.custom != true{
+            if  custom != true{
                 rawPing = ["lat": passLat, "long": passLong, "location": "\(currentPlace!)"]
             } else {
                 rawPing = ["lat": lat, "long": long, "location": "\(currentPlace!)"]
@@ -119,15 +104,15 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
             var longitude:CLLocationDegrees
             var latitude:CLLocationDegrees
             
-            if self.custom  != true{
+            if  custom  != true{
                 print("Indicates not custom")
-                longitude = self.passLong
-                latitude =  self.passLat
+                longitude =  passLong
+                latitude =   passLat
                 
             } else {
                 print("Indicates  custom")
-                longitude = self.long
-                latitude =  self.lat
+                longitude =  long
+                latitude =   lat
             }
             var latDelta:CLLocationDegrees = 0.001
             var longDelta:CLLocationDegrees = 0.001
@@ -135,35 +120,28 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
             
             var location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
             var theRegion = MKCoordinateRegionMake(location,theSpan)
-            self.currentLocation.setRegion(theRegion, animated: false)
+             currentLocation.setRegion(theRegion, animated: false)
             
             var theLocationAnnotation = MKPointAnnotation()
             
             theLocationAnnotation.coordinate = location
             theLocationAnnotation.title =  currentPlace ?? "ERROR"
             theLocationAnnotation.subtitle = StoryBoard.locationAnnotation
-            self.currentAnnotation = theLocationAnnotation
-            self.currentLocation.addAnnotation(theLocationAnnotation)
-            self.currentLocation.selectAnnotation(theLocationAnnotation, animated: true)
+             currentAnnotation = theLocationAnnotation
+             currentLocation.addAnnotation(theLocationAnnotation)
+             currentLocation.selectAnnotation(theLocationAnnotation, animated: true)
         }
     }
     
     
-    private func updateCount(){
-        let user = self.meteor.collections["users"] as! M13OrderedDictionary
-        let userObject = user.objectAtIndex(0) as! [String:AnyObject]
-        let pingArray = userObject["Pings"] as! [AnyObject]
-        pingCount = "\(pingArray.count)"
-    }
-    
     
     private func updateLocButton(){
-        if (!self.runOnce){
+        if (!runOnce){
             
-            let selectedVenueText = self.nearByVenues[0]["location"] as! String
-            self.place.titleLabel!.text = "\(selectedVenueText)"
-            self.place.titleLabel!.text = self.place.titleLabel!.text! + " ▽"
-            self.runOnce = true
+            let selectedVenueText =  nearByVenues[0]["location"] as! String
+             place.titleLabel!.text = "\(selectedVenueText)"
+             place.titleLabel!.text =  place.titleLabel!.text! + " ▽"
+             runOnce = true
         }
     }
     
@@ -171,7 +149,7 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
     //Shows use the input for writing a message
     @IBAction private func longPress(sender: AnyObject) {
         println("Long press")
-        self.message.hidden = false
+         message.hidden = false
     }
     
     
@@ -192,8 +170,8 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
             let longitude = coor.coordinate.longitude
             NSLog(longitude.description)
             NSLog(latitude.description)
-            self.long = longitude
-            self.lat = latitude
+             self.long = longitude
+             self.lat = latitude
             
             
             if (error != nil) {
@@ -203,7 +181,7 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
             
             if placemarks.count > 0 {
                 let pm = placemarks[0] as! CLPlacemark
-                self.displayLocationInfo(pm)
+                 self.displayLocationInfo(pm)
             } else {
                 NSLog("Problem with the data received from geocoder")
             }
@@ -220,9 +198,9 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
         
         loadPlaces()
         
-        if self.justLaunched {
-            let latitude:CLLocationDegrees = self.lat
-            let longitude:CLLocationDegrees = self.long
+        if  justLaunched {
+            let latitude:CLLocationDegrees =  lat
+            let longitude:CLLocationDegrees =  long
             let latDelta:CLLocationDegrees = 0.001
             let longDelta:CLLocationDegrees = 0.001
             let theSpan:MKCoordinateSpan = MKCoordinateSpanMake(latDelta, longDelta)
@@ -244,8 +222,8 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
     
     private func loadPlaces(){
         
-        let lat = NSNumber(double: self.lat)
-        let long = NSNumber(double: self.long)
+        let lat = NSNumber(double:  self.lat)
+        let long = NSNumber(double:  self.long)
         let limit = NSNumber(int: 20)
         let radius = NSNumber(int: 100)
         
@@ -264,13 +242,13 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
                     
                     let long =  (places["location"] as! [String:AnyObject])["lng"] as! Double
                     
-                    self.nearByVenues.append(["location": name,"lat": lat, "long": long])
+                     self.nearByVenues.append(["location": name,"lat": lat, "long": long])
                     
-                    if  self.nearByVenues.count == 1 {
-                        self.rawPing  = ["lat": lat, "long": long, "location": name]
+                    if   self.nearByVenues.count == 1 {
+                         self.rawPing  = ["lat": lat, "long": long, "location": name]
                         
                     }
-                    self.updateLocButton()
+                     self.updateLocButton()
                     
                 }
             } else {
@@ -290,16 +268,10 @@ class MainViewController: UIViewController, MKMapViewDelegate,CLLocationManagerD
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if segue.identifier == StoryBoard.toFriendsList {
-            if let flvc = segue.destinationViewController.contentViewController as? FriendsListViewController{
-                rawPing["message"] = self.message.text
-                flvc.rawPing = self.rawPing
-            }
-        }
         
         if segue.identifier == StoryBoard.settingsPopover {
             if let ctvc = segue.destinationViewController.contentViewController as? CampusTableViewController{
-                ctvc.nearByVenues  = self.nearByVenues
+                ctvc.nearByVenues  =  nearByVenues
             }
             
         }

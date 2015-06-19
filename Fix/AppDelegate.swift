@@ -16,17 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //Todo: Take most meteor calls off the main  thread
     
-    
-    var meteorClient = initialiseMeteor("pre2", "ws://favor2.meteor.com/websocket") //"ws://localhost:3000/websocket"
-    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        
-        meteorClient.addSubscription("posts3", withParameters: [["limit":15]])
-        meteorClient.addSubscription("userData")
-        meteorClient.addSubscription("interestPosts", withParameters:[[ "_id": "6S7jSnGWp2WBEmndf"]] )
-    
-
+       
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reportConnection", name: MeteorClientDidConnectNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reportDisconnection", name: MeteorClientDidDisconnectNotification, object: nil)
@@ -38,24 +30,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let startViewController = storyboard.instantiateViewControllerWithIdentifier("MainViewController") as! UIViewController
         
-        //self.window?.rootViewController!.presentViewController(startViewController, animated:true, completion:nil)
+                
         
-        
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        self.window?.rootViewController = startViewController;
-        self.window?.makeKeyAndVisible()
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window?.rootViewController = startViewController;
+        window?.makeKeyAndVisible()
         
         return true
     }
     
-    func reportConnection() {
-        println("================> connected to server!")
-    }
-    
-    func reportDisconnection() {
-        println("================> disconnected from server!")
-    }
-    
+
     
     
     func applicationWillResignActive(application: UIApplication) {

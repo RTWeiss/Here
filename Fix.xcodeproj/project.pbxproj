@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		78123B30E6B76A3E84B89FF5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBEA738697331AEDBBEFF458 /* libPods.a */; };
-		A24F0C421ACC2C3E00DAD2AF /* BFPaperTableViewCellWithPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24F0C411ACC2C3E00DAD2AF /* BFPaperTableViewCellWithPing.swift */; };
 		A28DA5CE1ACC90950013FE30 /* Locksmith.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28DA5CC1ACC90950013FE30 /* Locksmith.swift */; };
 		A28DA5CF1ACC90950013FE30 /* LocksmithRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28DA5CD1ACC90950013FE30 /* LocksmithRequest.swift */; };
 		A29193AA1ACB6FB9002732FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193A91ACB6FB9002732FD /* AppDelegate.swift */; };
@@ -17,15 +16,9 @@
 		A29193B41ACB6FBA002732FD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A29193B21ACB6FBA002732FD /* LaunchScreen.xib */; };
 		A29193C01ACB6FBA002732FD /* FixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193BF1ACB6FBA002732FD /* FixTests.swift */; };
 		A29193D21ACB6FCA002732FD /* bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = A29193CA1ACB6FCA002732FD /* bridge.m */; };
-		A29193D31ACB6FCA002732FD /* AddFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193CB1ACB6FCA002732FD /* AddFriendsTableViewController.swift */; };
-		A29193D41ACB6FCA002732FD /* FriendsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193CC1ACB6FCA002732FD /* FriendsListViewController.swift */; };
-		A29193D51ACB6FCA002732FD /* PingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193CD1ACB6FCA002732FD /* PingDetailViewController.swift */; };
-		A29193D61ACB6FCA002732FD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193CE1ACB6FCA002732FD /* LoginViewController.swift */; };
 		A29193D71ACB6FCA002732FD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193CF1ACB6FCA002732FD /* MainViewController.swift */; };
-		A29193D81ACB6FCA002732FD /* PingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193D01ACB6FCA002732FD /* PingsTableViewController.swift */; };
 		A29193D91ACB6FCA002732FD /* CampusTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193D11ACB6FCA002732FD /* CampusTableViewController.swift */; };
 		A29193DB1ACB8BB1002732FD /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29193DA1ACB8BB1002732FD /* UserInfo.swift */; };
-		A2A1A1631ACC70CB007947E2 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23C77081ACC700000A572D8 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,8 +33,6 @@
 
 /* Begin PBXFileReference section */
 		9B4709A18FCEC0C953DB9D6E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		A23C77081ACC700000A572D8 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		A24F0C411ACC2C3E00DAD2AF /* BFPaperTableViewCellWithPing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BFPaperTableViewCellWithPing.swift; sourceTree = "<group>"; };
 		A28DA5CC1ACC90950013FE30 /* Locksmith.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Locksmith.swift; sourceTree = "<group>"; };
 		A28DA5CD1ACC90950013FE30 /* LocksmithRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocksmithRequest.swift; sourceTree = "<group>"; };
 		A29193A41ACB6FB9002732FD /* Fix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fix.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,12 +46,7 @@
 		A29193BF1ACB6FBA002732FD /* FixTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixTests.swift; sourceTree = "<group>"; };
 		A29193C91ACB6FC9002732FD /* Fix-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fix-Bridging-Header.h"; sourceTree = "<group>"; };
 		A29193CA1ACB6FCA002732FD /* bridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bridge.m; sourceTree = "<group>"; };
-		A29193CB1ACB6FCA002732FD /* AddFriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendsTableViewController.swift; sourceTree = "<group>"; };
-		A29193CC1ACB6FCA002732FD /* FriendsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsListViewController.swift; sourceTree = "<group>"; };
-		A29193CD1ACB6FCA002732FD /* PingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingDetailViewController.swift; sourceTree = "<group>"; };
-		A29193CE1ACB6FCA002732FD /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A29193CF1ACB6FCA002732FD /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		A29193D01ACB6FCA002732FD /* PingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PingsTableViewController.swift; sourceTree = "<group>"; };
 		A29193D11ACB6FCA002732FD /* CampusTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CampusTableViewController.swift; sourceTree = "<group>"; };
 		A29193DA1ACB8BB1002732FD /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		B7125674670C65577161159D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -177,15 +163,8 @@
 		A29193DC1ACB9284002732FD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A29193CB1ACB6FCA002732FD /* AddFriendsTableViewController.swift */,
-				A23C77081ACC700000A572D8 /* SettingsViewController.swift */,
-				A29193CC1ACB6FCA002732FD /* FriendsListViewController.swift */,
-				A29193CD1ACB6FCA002732FD /* PingDetailViewController.swift */,
-				A29193CE1ACB6FCA002732FD /* LoginViewController.swift */,
 				A29193CF1ACB6FCA002732FD /* MainViewController.swift */,
-				A29193D01ACB6FCA002732FD /* PingsTableViewController.swift */,
 				A29193D11ACB6FCA002732FD /* CampusTableViewController.swift */,
-				A24F0C411ACC2C3E00DAD2AF /* BFPaperTableViewCellWithPing.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -327,17 +306,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A28DA5CF1ACC90950013FE30 /* LocksmithRequest.swift in Sources */,
-				A2A1A1631ACC70CB007947E2 /* SettingsViewController.swift in Sources */,
-				A29193D61ACB6FCA002732FD /* LoginViewController.swift in Sources */,
 				A28DA5CE1ACC90950013FE30 /* Locksmith.swift in Sources */,
-				A29193D81ACB6FCA002732FD /* PingsTableViewController.swift in Sources */,
-				A24F0C421ACC2C3E00DAD2AF /* BFPaperTableViewCellWithPing.swift in Sources */,
 				A29193D71ACB6FCA002732FD /* MainViewController.swift in Sources */,
 				A29193D21ACB6FCA002732FD /* bridge.m in Sources */,
 				A29193D91ACB6FCA002732FD /* CampusTableViewController.swift in Sources */,
-				A29193D41ACB6FCA002732FD /* FriendsListViewController.swift in Sources */,
-				A29193D51ACB6FCA002732FD /* PingDetailViewController.swift in Sources */,
-				A29193D31ACB6FCA002732FD /* AddFriendsTableViewController.swift in Sources */,
 				A29193DB1ACB8BB1002732FD /* UserInfo.swift in Sources */,
 				A29193AA1ACB6FB9002732FD /* AppDelegate.swift in Sources */,
 			);
